@@ -20,6 +20,7 @@
                                         <field name="fecha_nacimiento"/>
                                         <field name="genero"/>
                                         <field name="modalidad_id"/>
+                                        <field name="curso_id" />
                                         <field name="curso_id"  domain="[('id_modalidad','==',modalidad_id)]"/>
                                     </group>
                                     <group >
