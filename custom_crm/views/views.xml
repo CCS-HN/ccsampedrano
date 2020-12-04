@@ -2,14 +2,14 @@
   <data>
 
 
-        <record model="ir.ui.view" id="crm_lead_form_inh">
-        <field name="name">crm.lead.form.form.view.inh</field>
+<!--         <record model="ir.ui.view" id="crm_lead_form_inh">
+        <field name="name">crm_lead_form_form_view_inh</field>
         <field name="model">crm.lead</field>
         <field name="inherit_id" ref="crm.crm_lead_view_form" />
 
         <field name="arch" type="xml">
 
-            <xpath expr="//form/sheet/notebook/page[@name='extra']" position="before">
+            <xpath expr="//form/sheet/notebook/page[@name='extra']" position="after">
                             <page name="alumno" string="Informacion Alumno">
                                 <group>
                                     <group>
@@ -35,7 +35,7 @@
                             </page>
             </xpath>
 </field>
-    </record>
+    </record> -->
     <!-- explicit list view definition -->
 <!--
     <record model="ir.ui.view" id="custom_crm.list">
