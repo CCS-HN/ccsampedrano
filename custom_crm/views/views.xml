@@ -13,8 +13,9 @@
                             <page name="alumno" string="Informacion Alumno">
                                 <group>
                                     <group>
+                                        <field name="id_alumno" />
                                         <field name="nombre_alumno" />
-                                        <field name="modalidad"/>
+                                        <!-- <field name="modalidad"/> -->
                                         <field name="edad"/>
                                         <field name="fecha_nacimiento"/>
                                         <field name="genero"/>
