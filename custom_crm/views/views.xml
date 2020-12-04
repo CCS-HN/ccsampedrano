@@ -21,8 +21,10 @@
                                         <field name="genero"/>
                                         <field name="modalidad_id"/>
                                         <field name="curso_id" />
-                                        <field name="curso_id"  domain="[('id_modalidad','==',modalidad_id)]"/>
+                                        <field name="tipo_sangre" />
+                                        <!-- <field name="curso_id"  domain="[('id_modalidad','==',modalidad_id)]"/> -->
                                     </group>
+                                    
                                     <group >
                                         <field name="pais"/>
                                         <field name="padecimiento"/>
@@ -33,9 +35,49 @@
                                         <field name="correo_secun"  string = "Correo Secundario"/>
 
                                     </group>
+
+                                    <group string="Informacion Alumno" >
+                                        <field name="id_padre" />
+                                        <field name="nombre_padre" />
+                                        <!-- <field name="modalidad"/> -->
+                                        <field name="fecha_padre"/>
+                                        <field name="movil_padre"/>
+                                        <field name="lugar_trb_padre"/>
+                                        <field name="tel_padre"/>
+                                    </group>
+
+                                    <group string="Informacion Madre" >
+                                        <field name="id_madre" />
+                                        <field name="nombre_madre" />
+                                        <!-- <field name="modalidad"/> -->
+                                        <field name="fecha_madre"/>
+                                        <field name="movil_madre"/>
+                                        <field name="lugar_trb_madre"/>
+                                        <field name="tel_madre"/>
+                                    </group>
+
+                                    <group string="Informacion Responsable" >
+                                        <field name="id_responsable" />
+                                        <field name="nombre_responsable" />
+                                        <!-- <field name="modalidad"/> -->
+                                        <field name="movil_responsable"/>
+                                        <field name="lugar_trb_responsable"/>
+                                        <field name="tel_responsable"/>
+                                    </group>
+                                    
+                                       <group string="Materia Retrasada" >
+                                        <field name="materia_retrasada" />
+                                        <field name="id_responsable_materia" />
+                                        <field name="nombre_responsable_materia"/>
+                                        <field name="id_responsable_materia2" />
+                                        <field name="nombre_responsable_materia2"/>
+
+
+                                    </group>
                                 </group>
                             </page>
             </xpath>
+
 </field>
     </record>
     <!-- explicit list view definition -->
