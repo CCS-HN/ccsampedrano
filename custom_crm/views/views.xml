@@ -19,7 +19,7 @@
                                         <field name="fecha_nacimiento"/>
                                         <field name="genero"/>
                                         <field name="modalidad_id"/>
-                                        <field name="curso_id"  domain="[('id_modalidad','==',modalidad_id.id)]"/>
+                                        <field name="curso_id"  domain="[('id_modalidad','=',modalidad_id.id)]"/>
                                     </group>
                                     <group >
                                         <field name="pais"/>
@@ -27,8 +27,8 @@
                                         <field name="receta"/>
                                         <field name="transporte"/>
                                         <field name="procedencia"/>
-                                        <field name="correo_pri" string = 'Correo Primario'/>
-                                        <field name="correo_secun"  string = 'Correo Secundario'/>
+                                        <field name="correo_pri" string = "Correo Primario"/>
+                                        <field name="correo_secun"  string = "Correo Secundario"/>
 
                                     </group>
                                 </group>
