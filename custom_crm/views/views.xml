@@ -13,65 +13,65 @@
                             <page name="alumno" string="Informacion Alumno">
                                 <group>
                                     <group>
-                                        <field name="id_alumno" />
-                                        <field name="nombre_alumno" />
+                                        <field name="id_alumno"  string = "ID RNE"/>
+                                        <field name="nombre_alumno" string = "Nombre Alumno" />
                                         <!-- <field name="modalidad"/> -->
-                                        <field name="edad"/>
-                                        <field name="fecha_nacimiento"/>
-                                        <field name="genero"/>
-                                        <field name="modalidad_id"/>
-                                        <field name="curso_id" />
-                                        <field name="tipo_sangre" />
+                                        <field name="edad" string = "Edad"/>
+                                        <field name="fecha_nacimiento" string = "Fecha de Nacimiento"/>
+                                        <field name="genero" string = "Genero" />
+                                        <field name="modalidad_id" string = "Modalidad"/>
+                                        <field name="curso_id"  string = "Curso"/>
+                                        <field name="tipo_sangre" string = "Tipo de Sangre"/>
                                         <!-- <field name="curso_id"  domain="[('id_modalidad','==',modalidad_id)]"/> -->
                                     </group>
-                                    
+
                                     <group >
-                                        <field name="pais"/>
-                                        <field name="padecimiento"/>
-                                        <field name="receta"/>
-                                        <field name="transporte"/>
-                                        <field name="procedencia"/>
+                                        <field name="pais" string = "Nacionalidad"/>
+                                        <field name="padecimiento" string = "Padecimiento"/>
+                                        <field name="receta" string = "Receta"/>
+                                        <field name="transporte" string = "Tipo de transporte"/>
+                                        <field name="procedencia" string = "Institucion de Procendencia"/>
                                         <field name="correo_pri" string = "Correo Primario"/>
                                         <field name="correo_secun"  string = "Correo Secundario"/>
 
                                     </group>
 
-                                    <group string="Informacion Alumno" >
-                                        <field name="id_padre" />
-                                        <field name="nombre_padre" />
+                                    <group string="Informacion Padre" >
+                                        <field name="id_padre" string = "ID"/>
+                                        <field name="nombre_padre" string = "Nombre" />
                                         <!-- <field name="modalidad"/> -->
-                                        <field name="fecha_padre"/>
-                                        <field name="movil_padre"/>
-                                        <field name="lugar_trb_padre"/>
-                                        <field name="tel_padre"/>
+                                        <field name="fecha_padre" string = "Fecha de Nacimiento"/>
+                                        <field name="movil_padre" string = "Movil"/>
+                                        <field name="lugar_trb_padre" string = "Lugar de trabajo"/>
+                                        <field name="tel_padre" string = "Telefono del trabajo"/>
                                     </group>
 
                                     <group string="Informacion Madre" >
-                                        <field name="id_madre" />
-                                        <field name="nombre_madre" />
+                                        <field name="id_madre" string = "ID"/>
+                                        <field name="nombre_madre" string = "Nombre"/>
                                         <!-- <field name="modalidad"/> -->
-                                        <field name="fecha_madre"/>
-                                        <field name="movil_madre"/>
-                                        <field name="lugar_trb_madre"/>
-                                        <field name="tel_madre"/>
+                                        <field name="fecha_madre" string = "Fecha de Nacimiento"/>
+                                        <field name="movil_madre" string = "Movil"/>
+                                        <field name="lugar_trb_madre" string = "Lugar de trabajo"/>
+                                        <field name="tel_madre" string = "Telefono de trabajo"/>
                                     </group>
 
                                     <group string="Informacion Responsable" >
-                                        <field name="id_responsable" />
-                                        <field name="nombre_responsable" />
+                                        <field name="id_responsable" string = "ID"/>
+                                        <field name="nombre_responsable" string = "Nombre"/>
                                         <!-- <field name="modalidad"/> -->
-                                        <field name="movil_responsable"/>
-                                        <field name="lugar_trb_responsable"/>
-                                        <field name="tel_responsable"/>
+                                        <field name="movil_responsable" string = "Movil"/>
+                                        <field name="lugar_trb_responsable" string = "Lugar de trabajo"/>
+                                        <field name="tel_responsable" string = "Telefono de trabajo"/>
                                     </group>
                                     
                                        <group string="Materia Retrasada" >
-                                        <field name="materia_retrasada" />
-                                        <field name="id_responsable_materia" />
-                                        <field name="nombre_responsable_materia"/>
-                                        <field name="id_responsable_materia2" />
-                                        <field name="nombre_responsable_materia2"/>
-
+                                        <field name="materia_retrasada" string = "Materia"/>
+                                        <field name="id_responsable_materia" string = "ID" />
+                                        <field name="nombre_responsable_materia" string = "Nombre"/>
+                                        <field name="id_responsable_materia2" string = "ID" />
+                                        <field name="nombre_responsable_materia2" string = "Nombre"/>
+s
 
                                     </group>
                                 </group>
