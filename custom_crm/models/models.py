@@ -24,7 +24,7 @@ class CRM(models.Model):
     procedencia = fields.Char()
     correo_pri = fields.Char()
     correo_secun = fields.Char()
-    tipo_ingreso = fields.Selection([('Reingreso', 'Reingreso'), ('PrimerIngreso', 'Primer Ingreso')])
+    tipo_ingreso = fields.Selection([('Reingreso', 'Rei-ngreso'), ('PrimerIngreso', 'Primer Ingreso')])
 
     id_padre = fields.Char()
     nombre_padre = fields.Char()
