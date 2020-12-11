@@ -28,6 +28,7 @@
 
                                     <group >
                                         <field name="pais" string = "Nacionalidad"/>
+                                        <field name="direcc" string = "Dirección"/>
                                         <field name="padecimiento" string = "Padecimiento"/>
                                         <field name="receta" string = "Receta"/>
                                         <field name="transporte" string = "Tipo de transporte"/>

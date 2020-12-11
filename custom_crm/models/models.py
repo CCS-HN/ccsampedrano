@@ -14,6 +14,7 @@ class CRM(models.Model):
     curso_id = fields.Many2one('crm.lead.cursos')
     modalidad = fields.Char()
     edad = fields.Integer()
+    direcc = fields.Char()
     fecha_nacimiento = fields.Date()
     genero = fields.Selection([('M', 'Masculino'), ('F', 'Femenino')])
     pais = fields.Many2one('res.country')
