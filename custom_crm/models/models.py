@@ -58,7 +58,8 @@ class CRM(models.Model):
 
     reci_info = fields.Selection([('Si', 'Si'), ('No', 'No')])
     name_cc = fields.Char(related='name',store=True)
-    tel = fields.Char()
+    tel = fields.Char(related='phone',store=True)
+    email = fields.Char(related='email_from',store=True)
     mas_info = fields.Text()
     rango_edad = fields.Selection([('9-12', '9-12'),('13-18', '13-18'),('9-12', '19-25'),('26-35', '26-35'),('36-40', '36-40'),('41-65', '41-65')])
     genero = fields.Selection([('M', 'Masculino'), ('F', 'Femenino')])

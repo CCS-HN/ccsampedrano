@@ -85,12 +85,13 @@
                                         <field name="reci_info"  string = "¿Te gustaria Recibir información obre nuestros programas y servicios?"/>
                                         <field name="name_cc"  string = "Nombre"/>
                                         <field name="tel" string = "Telefono" />
+                                        <field name="email" string = "E - Mail" />
                                         <field name="rango_edad" string = "Edad por Rango" />
                                         <field name="genero" string = "Genero" />
                                         <field name="localidad" string = "Localidad" />
                                         <!-- <field name="taller"  /> -->
-                                        <field name="taller_id" widget="many2many_tags" options="{'no_create_edit':'0'}" string = "¿Cómo te enteraste de este taller? "/>
-                                        <field name="otrotaller_id" widget="many2many_tags" options="{'no_create_edit':'0'}"  string = "¿En qué otro taller podrías tener interés?"/>
+                                        <field name="taller_id" widget="many2many_tags"  string = "¿Cómo te enteraste de este taller? "/>
+                                        <field name="otrotaller_id" widget="many2many_tags"   string = "¿En qué otro taller podrías tener interés?"/>
 
                                         <!-- <field name="otro_taller" string = "¿En qué otro taller podrías tener interés?" /> -->
                                         <field name="mas_info" string = "Más Informacion" />
