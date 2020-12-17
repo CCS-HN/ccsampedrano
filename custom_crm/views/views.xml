@@ -78,7 +78,22 @@
                                 </group>
                             </page>
             </xpath>
-
+            <xpath expr="//form/sheet/notebook/page[@name='extra']" position="before">
+                            <page name="cc_conversacion" string="Curso Vacacional de Conversación">
+                                <group>
+                                    <group>
+                                        <field name="reci_info"  string = "¿Te gustaria Recibir información obre nuestros programas y servicios?"/>
+                                        <field name="name_cc"  string = "Nombre"/>
+                                        <field name="tel" string = "Telefono" />
+                                        <field name="rango_edad" string = "Edad por Rango" />
+                                        <field name="genero" string = "Genero" />
+                                        <field name="localidad" string = "Localidad" />
+                                        <field name="taller" string = "¿Cómo te enteraste de este taller? " />
+                                        <field name="otro_taller" string = "¿En qué otro taller podrías tener interés?" />
+                                        <field name="mas_info" string = "Más Informacion" />
+                                    </group>
+                            </page>
+            </xpath>
 </field>
     </record>
     <!-- explicit list view definition -->
