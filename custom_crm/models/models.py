@@ -66,6 +66,8 @@ class CRM(models.Model):
     taller = fields.Selection([('Facebook', 'Facebook'), ('Instagram', 'Instagram'),('Pagina Web', 'Pagina Web'), ('Correo Electronico', 'Correo Electronico'),('WhatsApp', 'WhatsApp'),('Amigo/Familiar', 'Amigo/Familiar')])
     otro_taller  = fields.Selection([('Pintura', 'Pintura'), ('Musica', 'Musica'), ('Ingles', 'Ingles'), ('Vacacional de Conversacion ', 'Vacacional de Conversacion'),('Vacacional de Ingles para niños', 'Vacacional de Ingles para niños'),('Área académica (Pre Básica, Básica y Media)', 'Área académica (Pre Básica, Básica y Media)'),('Biblioteca', 'Biblioteca'),('Culturales', 'Culturales')])
 
+    taller_id = fields.Many2many('crm.lead.taller', string="Taller")
+    otrotaller_id = fields.Many2many('crm.lead.taller.otro', string="Otro Taller")
 
 class CRM_modalidad(models.Model):
     _name = 'crm.lead.modalidad'
@@ -94,3 +96,19 @@ class CRM_cursos(models.Model):
 #     def _value_pc(self):
 #         for record in self:
 #             record.value2 = float(record.value) / 100
+
+
+class CRM_taller(models.Model):
+    _name = 'crm.lead.taller'
+    _description = 'Taller'
+
+    name = fields.Char()
+
+
+class CRM_taller_otro(models.Model):
+    _name = 'crm.lead.taller.otro'
+    _description = 'Otro de interes Taller'
+
+    name = fields.Char()
+
+

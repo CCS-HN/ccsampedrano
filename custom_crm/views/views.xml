@@ -88,8 +88,11 @@
                                         <field name="rango_edad" string = "Edad por Rango" />
                                         <field name="genero" string = "Genero" />
                                         <field name="localidad" string = "Localidad" />
-                                        <field name="taller" string = "¿Cómo te enteraste de este taller? " />
-                                        <field name="otro_taller" string = "¿En qué otro taller podrías tener interés?" />
+                                        <!-- <field name="taller"  /> -->
+                                        <field name="taller_id" widget="many2many_tags" options="{'no_create_edit':'0'}" string = "¿Cómo te enteraste de este taller? "/>
+                                        <field name="otrotaller_id" widget="many2many_tags" options="{'no_create_edit':'0'}"  string = "¿En qué otro taller podrías tener interés?"/>
+
+                                        <!-- <field name="otro_taller" string = "¿En qué otro taller podrías tener interés?" /> -->
                                         <field name="mas_info" string = "Más Informacion" />
                                     </group>
                                   </group>
