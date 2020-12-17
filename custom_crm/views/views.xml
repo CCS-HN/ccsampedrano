@@ -92,6 +92,7 @@
                                         <field name="otro_taller" string = "¿En qué otro taller podrías tener interés?" />
                                         <field name="mas_info" string = "Más Informacion" />
                                     </group>
+                                  </group>
                             </page>
             </xpath>
 </field>
