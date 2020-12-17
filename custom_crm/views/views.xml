@@ -78,7 +78,7 @@
                                 </group>
                             </page>
             </xpath>
-            <xpath expr="//form/sheet/notebook/page[@name='extra']" position="before">
+            <xpath expr="//form/sheet/notebook/page[@name='lead']" position="after">
                             <page name="cc_conversacion" string="Curso Vacacional de Conversación">
                                 <group>
                                     <group>
