@@ -56,6 +56,17 @@ class CRM(models.Model):
     nombre_responsable_materia2 = fields.Char()
 
 
+    reci_info = fields.Selection([('Si', 'Si'), ('No', 'No')])
+    name_cc = fields.Char(related='name',store=True)
+    tel = fields.Char()
+    mas_info = fields.Text()
+    rango_edad = fields.Selection([('9-12', '9-12'),('13-18', '13-18'),('9-12', '19-25'),('26-35', '26-35'),('36-40', '36-40'),('41-65', '41-65')])
+    genero = fields.Selection([('M', 'Masculino'), ('F', 'Femenino')])
+    localidad = fields.Selection([('San Pedro Sula', 'San Pedro Sula'), ('Cofradia', 'Cofradia'),('Pimienta', 'Pimienta'),('Taulabe', 'Taulabe'),('Villanueva', 'Villanueva'),('San Manuel', 'San Manuel'),('Siguatepeque', 'Siguatepeque'),('El Progreso', 'El Progreso'),('Quimistan', 'Quimistan'),('Jesus de Otoro', 'Jesus de Otoro'),('Otro', 'Otro')])
+    taller = fields.Selection([('Facebook', 'Facebook'), ('Instagram', 'Instagram'),('Pagina Web', 'Pagina Web'), ('Correo Electronico', 'Correo Electronico'),('WhatsApp', 'WhatsApp'),('Amigo/Familiar', 'Amigo/Familiar')])
+    otro_taller  = fields.Selection([('Pintura', 'Pintura'), ('Musica', 'Musica'), ('Ingles', 'Ingles'), ('Vacacional de Conversacion ', 'Vacacional de Conversacion'),('Vacacional de Ingles para niños', 'Vacacional de Ingles para niños'),('Área académica (Pre Básica, Básica y Media)', 'Área académica (Pre Básica, Básica y Media)'),('Biblioteca', 'Biblioteca'),('Culturales', 'Culturales')])
+
+
 class CRM_modalidad(models.Model):
     _name = 'crm.lead.modalidad'
     _description = 'Modalidad'
@@ -83,19 +94,3 @@ class CRM_cursos(models.Model):
 #     def _value_pc(self):
 #         for record in self:
 #             record.value2 = float(record.value) / 100
-
-
-class CRM_vacacional(models.Model):
-    _name = 'crm.lead.curso.vacacional'
-	_inherit = 'crm.lead'
-    _description = 'Curso Vacacional de Conversación'
-
-    reci_info = fields.Selection([('Si', 'Si'), ('No', 'No')])
-    name_cc = fields.Char(related='name',store=True)
-    tel = fields.Char()
-    mas_info = fields.Text()
-    rango_edad = fields.Selection([('9-12', '9-12'),('13-18', '13-18'),('9-12', '19-25'),('26-35', '26-35'),('36-40', '36-40'),('41-65', '41-65')])
-    genero = fields.Selection([('M', 'Masculino'), ('F', 'Femenino')])
-    localidad = fields.Selection([('San Pedro Sula', 'San Pedro Sula'), ('Cofradia', 'Cofradia'),('Pimienta', 'Pimienta'),('Taulabe', 'Taulabe'),('Villanueva', 'Villanueva'),('San Manuel', 'San Manuel'),('Siguatepeque', 'Siguatepeque'),('El Progreso', 'El Progreso'),('Quimistan', 'Quimistan'),('Jesus de Otoro', 'Jesus de Otoro'),('Otro', 'Otro')])
-    taller = fields.Selection([('Facebook', 'Facebook'), ('Instagram', 'Instagram'),('Pagina Web', 'Pagina Web'), ('Correo Electronico', 'Correo Electronico'),('WhatsApp', 'WhatsApp'),('Amigo/Familiar', 'Amigo/Familiar')])
-    otro_taller  = fields.Selection([('Pintura', 'Pintura'), ('Musica', 'Musica'), ('Ingles', 'Ingles'), ('Vacacional de Conversacion ', 'Vacacional de Conversacion'),('Vacacional de Ingles para niños', 'Vacacional de Ingles para niños'),('Área académica (Pre Básica, Básica y Media)', 'Área académica (Pre Básica, Básica y Media)'),('Biblioteca', 'Biblioteca'),('Culturales', 'Culturales')])
