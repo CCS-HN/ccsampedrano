@@ -61,7 +61,7 @@ class CRM(models.Model):
     tel = fields.Char(related='phone',store=True)
     email = fields.Char(related='email_from',store=True)
     mas_info = fields.Text()
-    rango_edad = fields.Selection([('9-12', '9-12'),('13-18', '13-18'),('9-12', '19-25'),('26-35', '26-35'),('36-40', '36-40'),('41-65', '41-65')])
+    rango_edad = fields.Selection([('9-12', '9-12'),('13-18', '13-18'),('9-12', '19-25'),('26-35', '26-35'),('36-40', '36-40'),('41-65', '41-65'),('>65', '>65')])
     genero = fields.Selection([('M', 'Masculino'), ('F', 'Femenino')])
     localidad = fields.Selection([('San Pedro Sula', 'San Pedro Sula'), ('Cofradia', 'Cofradia'),('Pimienta', 'Pimienta'),('Taulabe', 'Taulabe'),('Villanueva', 'Villanueva'),('San Manuel', 'San Manuel'),('Siguatepeque', 'Siguatepeque'),('El Progreso', 'El Progreso'),('Quimistan', 'Quimistan'),('Jesus de Otoro', 'Jesus de Otoro'),('Otro', 'Otro')])
     taller = fields.Selection([('Facebook', 'Facebook'), ('Instagram', 'Instagram'),('Pagina Web', 'Pagina Web'), ('Correo Electronico', 'Correo Electronico'),('WhatsApp', 'WhatsApp'),('Amigo/Familiar', 'Amigo/Familiar')])
