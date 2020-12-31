@@ -13,25 +13,25 @@
                             <page name="alumno" string="Informacion Alumno">
                                 <group>
                                     <group>
-                                        <field name="id_alumno"  string = "ID RNE"/>
+                                        <field name="id_alumno"  string = "ID RNE" required="1"/>
                                         <field name="tipo_ingreso"  string = "Tipo de Ingreso"/>
-                                        <field name="nombre_alumno" string = "Nombre Alumno" />
+                                        <field name="nombre_alumno" string = "Nombre Alumno"  required="1" />
                                         <!-- <field name="modalidad"/> -->
-                                        <field name="edad" string = "Edad"/>
-                                        <field name="fecha_nacimiento" string = "Fecha de Nacimiento"/>
-                                        <field name="genero" string = "Genero" />
-                                        <field name="modalidad_id" string = "Modalidad"/>
-                                        <field name="curso_id"  string = "Curso"/>
-                                        <field name="tipo_sangre" string = "Tipo de Sangre"/>
+                                        <field name="edad" string = "Edad" required="1"/>
+                                        <field name="fecha_nacimiento" string = "Fecha de Nacimiento" required="1"/>
+                                        <field name="genero" string = "Genero" required="1" />
+                                        <field name="modalidad_id" string = "Modalidad" required="1"/>
+                                        <field name="curso_id"  string = "Curso" required="1"/>
+                                        <field name="tipo_sangre" string = "Tipo de Sangre" required="1"/>
                                         <!-- <field name="curso_id"  domain="[('id_modalidad','==',modalidad_id)]"/> -->
                                     </group>
 
                                     <group >
-                                        <field name="pais" string = "Nacionalidad"/>
-                                        <field name="direcc" string = "Dirección"/>
+                                        <field name="pais" string = "Nacionalidad" required="1"/>
+                                        <field name="direcc" string = "Dirección" required="1"/>
                                         <field name="padecimiento" string = "Padecimiento"/>
                                         <field name="receta" string = "Receta"/>
-                                        <field name="transporte" string = "Tipo de transporte"/>
+                                        <field name="transporte" string = "Tipo de transporte" required="1"/>
                                         <field name="procedencia" string = "Institucion de Procendencia"/>
                                         <field name="correo_pri" string = "Correo Primario"/>
                                         <field name="correo_secun"  string = "Correo Secundario"/>
