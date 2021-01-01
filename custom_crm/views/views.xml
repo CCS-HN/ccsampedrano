@@ -13,16 +13,16 @@
                             <page name="alumno" string="Informacion Alumno">
                                 <group>
                                     <group>
-                                        <field name="id_alumno"  string = "ID RNE" required="1"/>
+                                        <field name="id_alumno"  string = "ID RNE" />
                                         <field name="tipo_ingreso"  string = "Tipo de Ingreso"/>
-                                        <field name="nombre_alumno" string = "Nombre Alumno"  required="1" />
+                                        <field name="nombre_alumno" string = "Nombre Alumno"  />
                                         <!-- <field name="modalidad"/> -->
                                         <field name="edad" string = "Edad" required="1"/>
-                                        <field name="fecha_nacimiento" string = "Fecha de Nacimiento" required="1"/>
-                                        <field name="genero" string = "Genero" required="1" />
-                                        <field name="modalidad_id" string = "Modalidad" required="1"/>
-                                        <field name="curso_id"  string = "Curso" required="1"/>
-                                        <field name="tipo_sangre" string = "Tipo de Sangre" required="1"/>
+                                        <field name="fecha_nacimiento" string = "Fecha de Nacimiento" />
+                                        <field name="genero" string = "Genero"  />
+                                        <field name="modalidad_id" string = "Modalidad" />
+                                        <field name="curso_id"  string = "Curso" />
+                                        <field name="tipo_sangre" string = "Tipo de Sangre"/>
                                         <!-- <field name="curso_id"  domain="[('id_modalidad','==',modalidad_id)]"/> -->
                                     </group>
 
@@ -100,6 +100,26 @@
                             </page>
             </xpath>
 </field>
+    </record>
+
+<record model="ir.ui.view" id="crm_lead_search_opportunity_inh">
+       <field name="name">view_crm_case_opportunities_filter_ihn</field>
+       <field name="model">crm.lead</field>
+       <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+       <field name="arch" type="xml">                            
+
+            <xpath expr="//field[@name='name']" position="replace">
+
+              <field name="name" string="Nombre del Alumno o ID" filter_domain="['|','|','|',('nombre_alumno', 'ilike', self),('id_alumno', 'ilike', self), ('nombre_padre', 'ilike', self), ('nombre_madre', 'ilike', self)]"/>
+
+            </xpath>
+              <xpath expr="//field[@name='name']" position="after">
+
+              <field name="name" string="Nombre del Padre o Madre" filter_domain="['|','|','|',('nombre_padre', 'ilike', self),('nombre_madre', 'ilike', self)]"/>
+
+            </xpath>
+
+        </field>
     </record>
     <!-- explicit list view definition -->
 <!--
