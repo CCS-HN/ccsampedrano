@@ -110,23 +110,23 @@
 
             <xpath expr="//field[@name='name']" position="replace">
 
-              <field name="name" string="Nombre del Alumno" filter_domain="['|','|','|',('nombre_alumno', 'ilike', self)]"/>
+              <field name="name" string="Nombre del Alumno" filter_domain="[('nombre_alumno', 'ilike', self)]"/>
 
             </xpath>
 
             <xpath expr="//field[@name='name']" position="after">
 
-              <field name="name" string="ID del Alumno" filter_domain="['|','|','|',('id_alumno', 'ilike', self)]"/>
+              <field name="id_alumno" string="ID del Alumno" filter_domain="[('id_alumno', 'ilike', self)]"/>
 
             </xpath>
               <xpath expr="//field[@name='name']" position="after">
 
-              <field name="nombre_padre" string="Nombre del Padre" filter_domain="['|','|','|',('nombre_padre', 'ilike', self)]"/>
+              <field name="nombre_padre" string="Nombre del Padre" filter_domain="[('nombre_padre', 'ilike', self)]"/>
 
             </xpath>
               <xpath expr="//field[@name='name']" position="after">
 
-              <field name="nombre_madre" string="Nombre de la Madre" filter_domain="['|','|','|',('nombre_madre', 'ilike', self)]"/>
+              <field name="nombre_madre" string="Nombre de la Madre" filter_domain="[('nombre_madre', 'ilike', self)]"/>
 
             </xpath>
 
