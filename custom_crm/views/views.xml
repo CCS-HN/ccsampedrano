@@ -110,7 +110,7 @@
 
             <xpath expr="//field[@name='name']" position="replace">
 
-              <field name="name" string="Nombre del Alumno o ID" filter_domain="['|','|','|',('nombre_alumno', 'ilike', self),('id_alumno', 'ilike', self), ('nombre_padre', 'ilike', self), ('nombre_madre', 'ilike', self)]"/>
+              <field name="name" string="Nombre del Alumno o ID" filter_domain="['|','|','|',('nombre_alumno', 'ilike', self),('id_alumno', 'ilike', self)]"/>
 
             </xpath>
               <xpath expr="//field[@name='name']" position="after">
