@@ -114,7 +114,7 @@
 
             </xpath>
 
-            <xpath expr="//field[@name='name']" position="replace">
+            <xpath expr="//field[@name='name']" position="after">
 
               <field name="name" string="ID del Alumno" filter_domain="['|','|','|',('id_alumno', 'ilike', self)]"/>
 
