@@ -28,7 +28,7 @@ class CRM(models.Model):
     tipo_ingreso = fields.Selection([('Reingreso', 'Re-ingreso'), ('PrimerIngreso', 'Primer Ingreso'),('Traslado', 'Traslado')],required=True)
 
     id_padre = fields.Char()
-    nombre_padre = fields.Char()
+    nombre_padre = fields.Char(related='partner_name')
     fecha_padre = fields.Date()
     movil_padre = fields.Char()
     lugar_trb_padre = fields.Char()
