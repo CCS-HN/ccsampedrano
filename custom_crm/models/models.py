@@ -24,6 +24,7 @@ class CRM(models.Model):
     transporte = fields.Selection([('Familiar', 'Familiar'), ('Privado', 'Privado'),('Publico','Publico')],required=True)
     procedencia = fields.Char()
     correo_pri = fields.Char()
+    correo_del_estudiante = fields.Char(required=True)
     correo_secun = fields.Char()
     tipo_ingreso = fields.Selection([('Reingreso', 'Re-ingreso'), ('PrimerIngreso', 'Primer Ingreso'),('Traslado', 'Traslado')],required=True)
 
