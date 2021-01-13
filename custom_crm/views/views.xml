@@ -17,7 +17,7 @@
                                         <field name="tipo_ingreso"  string = "Tipo de Ingreso"/>
                                         <field name="nombre_alumno" string = "Nombre Alumno"  />
                                         <field name="becado2" string = "Becado"  />
-                                        <field name="correo_del_estudiante" string = "Correo Electronico"  />
+                                        <field name="correo_del_estudiante" string = "Correo del Estudiante"  />
                                         <!-- <field name="modalidad"/> -->
                                         <field name="edad" string = "Edad" required="1"/>
                                         <field name="fecha_nacimiento" string = "Fecha de Nacimiento" />
@@ -62,7 +62,7 @@
                                         <field name="tel_madre" string = "Telefono de trabajo"/>
                                     </group>
 
-                                    <group string="Informacion Responsable" >
+                                    <group string="Informacion del Encargado" >
                                         <field name="id_responsable" string = "ID"/>
                                         <field name="nombre_responsable" string = "Nombre"/>
                                         <!-- <field name="modalidad"/> -->
