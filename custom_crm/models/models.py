@@ -43,7 +43,8 @@ class CRM(models.Model):
     tel_madre = fields.Char()
 
     id_responsable = fields.Char()
-    nombre_responsable = fields.Char(related='contact_name')
+    # nombre_responsable = fields.Char(related='contact_name')
+    nombre_responsable = fields.Char()
     movil_responsable = fields.Char()
     lugar_trb_responsable = fields.Char()
     tel_responsable = fields.Char()
