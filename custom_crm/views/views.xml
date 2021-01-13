@@ -17,6 +17,7 @@
                                         <field name="tipo_ingreso"  string = "Tipo de Ingreso"/>
                                         <field name="nombre_alumno" string = "Nombre Alumno"  />
                                         <field name="becado2" string = "Becado"  />
+                                        <field name="correo_del_estudiante" string = "Correo Electronico"  />
                                         <!-- <field name="modalidad"/> -->
                                         <field name="edad" string = "Edad" required="1"/>
                                         <field name="fecha_nacimiento" string = "Fecha de Nacimiento" />
