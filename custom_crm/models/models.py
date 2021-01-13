@@ -71,6 +71,7 @@ class CRM(models.Model):
     otrotaller_id = fields.Many2many('crm.lead.taller.otro', string="Otro Taller")
 
     becado = fields.Boolean(default=False)
+    becado2 = fields.Selection([('No', 'No'), ('Si', 'Si')])
 
 class CRM_modalidad(models.Model):
     _name = 'crm.lead.modalidad'
