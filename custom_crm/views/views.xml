@@ -16,6 +16,7 @@
                                         <field name="id_alumno"  string = "ID RNE" />
                                         <field name="tipo_ingreso"  string = "Tipo de Ingreso"/>
                                         <field name="nombre_alumno" string = "Nombre Alumno"  />
+                                        <field name="becado" string = "Becados"  />
                                         <!-- <field name="modalidad"/> -->
                                         <field name="edad" string = "Edad" required="1"/>
                                         <field name="fecha_nacimiento" string = "Fecha de Nacimiento" />
