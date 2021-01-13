@@ -33,14 +33,15 @@
                                         <field name="receta" string = "Receta"/>
                                         <field name="transporte" string = "Tipo de transporte" required="1"/>
                                         <field name="procedencia" string = "Institucion de Procendencia"/>
-                                        <field name="correo_pri" string = "Correo Primario"/>
-                                        <field name="correo_secun"  string = "Correo Secundario"/>
+                                        
+                                        
 
                                     </group>
 
                                     <group string="Informacion Padre" >
                                         <field name="id_padre" string = "ID"/>
                                         <field name="nombre_padre" string = "Nombre" />
+                                        <field name="correo_pri" string = "Correo del Padre"/>
                                         <!-- <field name="modalidad"/> -->
                                         <field name="fecha_padre" string = "Fecha de Nacimiento"/>
                                         <field name="movil_padre" string = "Movil"/>
@@ -51,6 +52,7 @@
                                     <group string="Informacion Madre" >
                                         <field name="id_madre" string = "ID"/>
                                         <field name="nombre_madre" string = "Nombre"/>
+                                        <field name="correo_secun"  string = "Correo de la Madre"/>
                                         <!-- <field name="modalidad"/> -->
                                         <field name="fecha_madre" string = "Fecha de Nacimiento"/>
                                         <field name="movil_madre" string = "Movil"/>
@@ -63,8 +65,8 @@
                                         <field name="nombre_responsable" string = "Nombre"/>
                                         <!-- <field name="modalidad"/> -->
                                         <field name="movil_responsable" string = "Movil"/>
-                                        <field name="lugar_trb_responsable" string = "Lugar de trabajo"/>
-                                        <field name="tel_responsable" string = "Telefono de trabajo"/>
+                                        <!-- <field name="lugar_trb_responsable" string = "Lugar de trabajo"/> -->
+                                        <!-- <field name="tel_responsable" string = "Telefono de trabajo"/> -->
                                     </group>
                                     
                                        <group string="Materia Retrasada" >

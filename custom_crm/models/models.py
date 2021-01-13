@@ -70,6 +70,8 @@ class CRM(models.Model):
     taller_id = fields.Many2many('crm.lead.taller', string="Taller")
     otrotaller_id = fields.Many2many('crm.lead.taller.otro', string="Otro Taller")
 
+    becado = fields.Boolean(default=False)
+
 class CRM_modalidad(models.Model):
     _name = 'crm.lead.modalidad'
     _description = 'Modalidad'
