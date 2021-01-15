@@ -76,8 +76,8 @@
                                         <field name="materia_retrasada" string = "Materia"/>
                                         <field name="id_responsable_materia" string = "ID" />
                                         <field name="nombre_responsable_materia" string = "Nombre"/>
-                                        <field name="id_responsable_materia2" string = "ID" />
-                                        <field name="nombre_responsable_materia2" string = "Nombre"/>
+    <!--                                     <field name="id_responsable_materia2" string = "ID" />
+                                        <field name="nombre_responsable_materia2" string = "Nombre"/> -->
 
                                     </group>
                                 </group>
