@@ -137,6 +137,32 @@
 
         </field>
     </record>
+
+
+        <record model="ir.ui.view" id="crm_lead_form_inh_tree">
+        <field name="name">crm_lead_form_form_view_inh_tree</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor" />
+
+        <field name="arch" type="xml">
+       	<xpath expr="//field[@name='name']" position="after">
+
+                                        <field name="id_alumno"  string = "ID RNE" />
+                                        <field name="tipo_ingreso"  string = "Tipo de Ingreso"/>
+                                        <field name="nombre_alumno" string = "Nombre Alumno"  />
+                                        <field name="becado2" string = "Becado"  />
+                                        <field name="correo_del_estudiante" string = "Correo del Estudiante"  />
+                                        <!-- <field name="modalidad"/> -->
+                                        <field name="edad" string = "Edad" required="1"/>
+                                        <field name="fecha_nacimiento" string = "Fecha de Nacimiento" />
+                                        <field name="genero" string = "Genero"  />
+                                        <field name="modalidad_id" string = "Modalidad" />
+                                        <field name="curso_id"  string = "Curso" />
+                                        <field name="tipo_sangre" string = "Tipo de Sangre"/>
+                                        <!-- <field name="curso_id"  domain="[('id_modalidad','==',modalidad_id)]"/> -->
+            </xpath>
+         </field>
+    </record>
     <!-- explicit list view definition -->
 <!--
     <record model="ir.ui.view" id="custom_crm.list">
