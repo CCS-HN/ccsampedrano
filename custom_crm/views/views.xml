@@ -15,7 +15,7 @@
                                     <group>
                                         <field name="id_alumno"  string = "ID RNE" />
                                         <field name="tipo_ingreso"  string = "Tipo de Ingreso"/>
-                                        <field name="titular_cuenta"  string = "Titular de cuenta"/>
+                                        <field name="titular_cuenta"  string = "Responsable de la cuenta"/>
                                         <field name="nombre_alumno" string = "Nombre Alumno"  />
                                         <field name="becado2" string = "Becado"  />
                                         <field name="correo_del_estudiante" string = "Correo del Estudiante"  />
