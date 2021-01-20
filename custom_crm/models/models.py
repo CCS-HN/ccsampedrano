@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 class CRM(models.Model):
     _inherit = 'crm.lead'
@@ -85,11 +86,11 @@ class CRM(models.Model):
     def create(self, values):
         # Override the original create function for the crm.lead model
         record = super(CRM, self).create(values)
- 
+        
         # Change the values of a variable in this super function
         record['id_alumno_int'] = int(record.id_alumno)
         # print 'Passed this function. passed_override_write_function value: ' + str(record['passed_override_write_function'])
- 
+        raise ValidationError(record.id_alumno_int)
         # Return the record so that the changes are applied and everything is stored.
         return record
 
