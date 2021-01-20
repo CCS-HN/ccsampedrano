@@ -91,7 +91,7 @@ class CRM(models.Model):
         record['id_alumno_int'] = int(record.id_alumno)
         # print 'Passed this function. passed_override_write_function value: ' + str(record['passed_override_write_function'])
         for rec in self:
-            rec.id_alumno_int == record.id_alumno_int:
+            if rec.id_alumno_int == record.id_alumno_int:
                 raise ValidationError("Este Alumno ya esta creado %s" % self.nombre_alumno)
         # Return the record so that the changes are applied and everything is stored.
         return record
