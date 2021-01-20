@@ -27,6 +27,7 @@ class CRM(models.Model):
     correo_del_estudiante = fields.Char(required=True)
     correo_secun = fields.Char()
     tipo_ingreso = fields.Selection([('Reingreso', 'Re-ingreso'), ('PrimerIngreso', 'Primer Ingreso'),('Traslado', 'Traslado')],required=True)
+    titular_cuenta = fields.Selection([('Padre', 'Padre'), ('Madre', 'Madre'),('Encargado', 'Encargado')],required=True)
 
     id_padre = fields.Char()
     nombre_padre = fields.Char(related='partner_name')
@@ -74,6 +75,8 @@ class CRM(models.Model):
 
     becado = fields.Boolean(default=False)
     becado2 = fields.Selection([('No', 'No'), ('Si', 'Si')])
+
+    _sql_constraints = [('name_unique', 'unique(name)', 'Este Alumno ya esta registrado!')]
 
 class CRM_modalidad(models.Model):
     _name = 'crm.lead.modalidad'
