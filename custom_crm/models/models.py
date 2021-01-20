@@ -6,9 +6,10 @@ class CRM(models.Model):
     _inherit = 'crm.lead'
     _description = 'CRM'
 
-    _sql_constraints = [('name_unique', 'unique(name)', 'Este Alumno ya esta registrado!')]
     
+
     id_alumno = fields.Char(related='name',store=True,size=13)
+    id_alumno_int = fields.Integer()
     nombre_alumno = fields.Char(required=True)
     # modalidad = fields.Char()
     modalidad_id = fields.Many2one('crm.lead.modalidad',required=True)
@@ -78,6 +79,21 @@ class CRM(models.Model):
     becado2 = fields.Selection([('No', 'No'), ('Si', 'Si')])
 
     # _sql_constraints = [('name_unique', 'unique(name)', 'Este Alumno ya esta registrado!')]
+
+
+    @api.model
+    def create(self, values):
+        # Override the original create function for the crm.lead model
+        record = super(CRM, self).create(values)
+ 
+        # Change the values of a variable in this super function
+        record['id_alumno_int'] = int(self.id_alumno)
+        # print 'Passed this function. passed_override_write_function value: ' + str(record['passed_override_write_function'])
+ 
+        # Return the record so that the changes are applied and everything is stored.
+    return record
+
+    _sql_constraints = [('id_alumno_int_unique', 'unique(id_alumno_int)', 'Este alumno ya esta registrado!')]
 
 class CRM_modalidad(models.Model):
     _name = 'crm.lead.modalidad'
