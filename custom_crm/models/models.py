@@ -90,11 +90,13 @@ class CRM(models.Model):
         # Change the values of a variable in this super function
         record['id_alumno_int'] = int(record.id_alumno)
         # print 'Passed this function. passed_override_write_function value: ' + str(record['passed_override_write_function'])
-        raise ValidationError(record.id_alumno_int)
+        for rec in self:
+            rec.id_alumno_int == record.id_alumno_int:
+                raise ValidationError("Este Alumno ya esta creado %s" % self.nombre_alumno)
         # Return the record so that the changes are applied and everything is stored.
         return record
 
-    _sql_constraints = [('id_alumno_int_unique', 'unique(id_alumno_int)', 'Este alumno ya esta registrado!')]
+    # _sql_constraints = [('id_alumno_int_unique', 'unique(id_alumno_int)', 'Este alumno ya esta registrado!')]
 
 class CRM_modalidad(models.Model):
     _name = 'crm.lead.modalidad'
