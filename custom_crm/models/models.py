@@ -7,7 +7,7 @@ class CRM(models.Model):
     _description = 'CRM'
 
     
-    id_alumno = fields.Char(related='name',store=True,size='13')
+    id_alumno = fields.Char(related='name',store=True,size=13)
     nombre_alumno = fields.Char(required=True)
     # modalidad = fields.Char()
     modalidad_id = fields.Many2one('crm.lead.modalidad',required=True)
