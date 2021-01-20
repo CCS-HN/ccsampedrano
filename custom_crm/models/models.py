@@ -88,7 +88,7 @@ class CRM(models.Model):
         record = super(CRM, self).create(values)
         
         # Change the values of a variable in this super function
-        record['id_alumno_int'] = int(record.id_alumno)
+        record['id_alumno_int'] = int(record.name)
         # print 'Passed this function. passed_override_write_function value: ' + str(record['passed_override_write_function'])
         for rec in self:
             if rec.id_alumno_int == record.id_alumno_int:
