@@ -7,7 +7,7 @@ class CRM(models.Model):
     _description = 'CRM'
 
     
-    id_alumno = fields.Char(related='name',store=True)
+    id_alumno = fields.Char(related='name',store=True,size='13')
     nombre_alumno = fields.Char(required=True)
     # modalidad = fields.Char()
     modalidad_id = fields.Many2one('crm.lead.modalidad',required=True)
@@ -76,7 +76,7 @@ class CRM(models.Model):
     becado = fields.Boolean(default=False)
     becado2 = fields.Selection([('No', 'No'), ('Si', 'Si')])
 
-    _sql_constraints = [('name_unique', 'unique(name)', 'Este Alumno ya esta registrado!')]
+    _sql_constraints = [('id_alumno_unique', 'unique(id_alumno)', 'Este Alumno ya esta registrado!')]
 
 class CRM_modalidad(models.Model):
     _name = 'crm.lead.modalidad'
