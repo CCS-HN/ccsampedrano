@@ -33,7 +33,7 @@ class CRM(models.Model):
     titular_cuenta = fields.Selection([('Padre', 'Padre'), ('Madre', 'Madre'),('Encargado', 'Encargado')],required=True)
 
     id_padre = fields.Char()
-    nombre_padre = fields.Char(related='partner_name')
+    nombre_padre = fields.Char()
     fecha_padre = fields.Date()
     movil_padre = fields.Char()
     lugar_trb_padre = fields.Char()
@@ -63,8 +63,8 @@ class CRM(models.Model):
 
 
     reci_info = fields.Selection([('Si', 'Si'), ('No', 'No')])
-    name_cc = fields.Char(related='name',store=True)
-    tel = fields.Char(related='phone',store=True)
+    name_cc = fields.Char()
+    tel = fields.Char()
     email = fields.Char()
     mas_info = fields.Text()
     rango_edad = fields.Selection([('9-12', '9-12'),('13-18', '13-18'),('9-12', '19-25'),('26-35', '26-35'),('36-40', '36-40'),('41-65', '41-65'),('>65', '>65')])
@@ -90,8 +90,10 @@ class CRM(models.Model):
         for rec in self:
             if rec.titular_cuenta == 'Padre':
                 record['email_from'] = rec.correo_pri
+                record['contact_name'] = rec.nombre_padre
             elif rec.titular_cuenta == 'Madre':
                 record['email_from'] = rec.correo_secun
+                record['contact_name'] = rec.nombre_madre
         # Return the record so that the changes are applied and everything is stored.
         return record
 
