@@ -103,11 +103,13 @@ class CRM(models.Model):
             if rec.titular_cuenta == 'Padre':
                 rec.email_from = rec.correo_pri
                 rec.contact_name = rec.nombre_padre
+                rec.phone  = rec.movil_padre
             elif rec.titular_cuenta == 'Madre':
                 rec.email_from = rec.correo_secun
                 rec.contact_name = rec.nombre_madre
+                rec.phone  = rec.movil_madre
 
-    # _sql_constraints = [('id_alumno_int_unique', 'unique(id_alumno_int)', 'Este alumno ya esta registrado!')]
+    # _sql_constraints = [('id_alumo_int_unique', 'unique(id_alumno_int)', 'Este alumno ya esta registrado!')]
 
 class CRM_modalidad(models.Model):
     _name = 'crm.lead.modalidad'
