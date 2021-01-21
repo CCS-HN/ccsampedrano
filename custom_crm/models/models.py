@@ -82,20 +82,30 @@ class CRM(models.Model):
     # _sql_constraints = [('name_unique', 'unique(name)', 'Este Alumno ya esta registrado!')]
 
 
-    @api.model
-    def create(self, values):
-        # Override the original create function for the crm.lead model
-        record = super(CRM, self).create(values)
-        # Change the values of a variable in this super function
+    # @api.model
+    # def create(self, values):
+    #     # Override the original create function for the crm.lead model
+    #     record = super(CRM, self).create(values)
+    #     # Change the values of a variable in this super function
+    #     for rec in self:
+    #         if rec.titular_cuenta == 'Padre':
+    #             record['email_from'] = rec.correo_pri
+    #             record['contact_name'] = rec.nombre_padre
+    #         elif rec.titular_cuenta == 'Madre':
+    #             record['email_from'] = rec.correo_secun
+    #             record['contact_name'] = rec.nombre_madre
+    #     # Return the record so that the changes are applied and everything is stored.
+    #     return record
+
+    @api.onchange('titular_cuenta')
+    def _onchange_cmr(self):
         for rec in self:
             if rec.titular_cuenta == 'Padre':
-                record['email_from'] = rec.correo_pri
-                record['contact_name'] = rec.nombre_padre
+                rec.email_from = rec.correo_pri
+                rec.contact_name = rec.nombre_padre
             elif rec.titular_cuenta == 'Madre':
-                record['email_from'] = rec.correo_secun
-                record['contact_name'] = rec.nombre_madre
-        # Return the record so that the changes are applied and everything is stored.
-        return record
+                rec.email_from = rec.correo_secun
+                rec.contact_name = rec.nombre_madre
 
     # _sql_constraints = [('id_alumno_int_unique', 'unique(id_alumno_int)', 'Este alumno ya esta registrado!')]
 
