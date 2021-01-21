@@ -82,19 +82,18 @@ class CRM(models.Model):
     # _sql_constraints = [('name_unique', 'unique(name)', 'Este Alumno ya esta registrado!')]
 
 
-    # @api.model
-    # def create(self, values):
-    #     # Override the original create function for the crm.lead model
-    #     record = super(CRM, self).create(values)
-        
-    #     # Change the values of a variable in this super function
-    #     record['id_alumno_int'] = int(record.name)
-    #     # print 'Passed this function. passed_override_write_function value: ' + str(record['passed_override_write_function'])
-    #     for rec in self:
-    #         if rec.id_alumno_int == record.id_alumno_int:
-    #             raise ValidationError("Este Alumno ya esta creado %s" % self.nombre_alumno)
-    #     # Return the record so that the changes are applied and everything is stored.
-    #     return record
+    @api.model
+    def create(self, values):
+        # Override the original create function for the crm.lead model
+        record = super(CRM, self).create(values)
+        # Change the values of a variable in this super function
+        for rec in self:
+            if rec.titular_cuenta == 'Padre':
+                record['email_from'] = rec.correo_pri
+            elif rec.titular_cuenta == 'Madre':
+                record['email_from'] = rec.correo_secun
+        # Return the record so that the changes are applied and everything is stored.
+        return record
 
     # _sql_constraints = [('id_alumno_int_unique', 'unique(id_alumno_int)', 'Este alumno ya esta registrado!')]
 
