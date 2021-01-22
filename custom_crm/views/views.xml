@@ -44,7 +44,7 @@
                                     <group string="Informacion Padre" >
                                         <field name="id_padre" string = "ID"/>
                                         <!-- <field name="nombre_padre" string = "Nombre" /> -->
-                                        <field name="partner_name" string = "Nombre" />
+                                        <field name="nombre_padre" string = "Nombre" />
                                         <field name="correo_pri" string = "Correo del Padre"/>
                                         <!-- <field name="modalidad"/> -->
                                         <field name="fecha_padre" string = "Fecha de Nacimiento"/>
