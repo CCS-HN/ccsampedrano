@@ -82,32 +82,34 @@ class CRM(models.Model):
     # _sql_constraints = [('name_unique', 'unique(name)', 'Este Alumno ya esta registrado!')]
 
 
-    # @api.model
-    # def create(self, values):
-    #     # Override the original create function for the crm.lead model
-    #     record = super(CRM, self).create(values)
-    #     # Change the values of a variable in this super function
-    #     for rec in self:
-    #         if rec.titular_cuenta == 'Padre':
-    #             record['email_from'] = rec.correo_pri
-    #             record['contact_name'] = rec.nombre_padre
-    #         elif rec.titular_cuenta == 'Madre':
-    #             record['email_from'] = rec.correo_secun
-    #             record['contact_name'] = rec.nombre_madre
-    #     # Return the record so that the changes are applied and everything is stored.
-    #     return record
-
-    @api.onchange('titular_cuenta')
-    def _onchange_cmr(self):
+    @api.model
+    def create(self, values):
+        # Override the original create function for the crm.lead model
+        record = super(CRM, self).create(values)
+        # Change the values of a variable in this super function
         for rec in self:
             if rec.titular_cuenta == 'Padre':
-                rec.email_from = rec.correo_pri
-                rec.partner_name = rec.nombre_padre
-                rec.phone  = rec.movil_padre
+                record['email_from'] = values.get("correo_pri") 
+                record['contact_name'] = values.get("nombre_padre") 
+                record['phone'] = values.get("movil_padre")
             elif rec.titular_cuenta == 'Madre':
-                rec.email_from = rec.correo_secun
-                rec.partner_name = rec.nombre_madre
-                rec.phone  = rec.movil_madre
+                record['email_from'] = values.get("correo_secun") 
+                record['contact_name'] = values.get("nombre_madre") 
+                record['phone'] = values.get("movil_madre")
+        # Return the record so that the changes are applied and everything is stored.
+        return record
+
+    # @api.onchange('titular_cuenta')
+    # def _onchange_cmr(self):
+    #     for rec in self:
+    #         if rec.titular_cuenta == 'Padre':
+    #             rec.email_from = rec.correo_pri
+    #             rec.partner_name = rec.nombre_padre
+    #             rec.phone  = rec.movil_padre
+    #         elif rec.titular_cuenta == 'Madre':
+    #             rec.email_from = rec.correo_secun
+    #             rec.partner_name = rec.nombre_madre
+    #             rec.phone  = rec.movil_madre
 
     # _sql_constraints = [('id_alumo_int_unique', 'unique(id_alumno_int)', 'Este alumno ya esta registrado!')]
 
