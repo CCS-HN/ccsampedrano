@@ -99,17 +99,17 @@ class CRM(models.Model):
         # Return the record so that the changes are applied and everything is stored.
         return record
 
-    # @api.onchange('titular_cuenta')
-    # def _onchange_cmr(self):
-    #     for rec in self:
-    #         if rec.titular_cuenta == 'Padre':
-    #             rec.email_from = rec.correo_pri
-    #             rec.partner_name = rec.nombre_padre
-    #             rec.phone  = rec.movil_padre
-    #         elif rec.titular_cuenta == 'Madre':
-    #             rec.email_from = rec.correo_secun
-    #             rec.partner_name = rec.nombre_madre
-    #             rec.phone  = rec.movil_madre
+    @api.onchange('titular_cuenta')
+    def _onchange_cmr(self):
+        for rec in self:
+            if rec.titular_cuenta == 'Padre':
+                rec.email_from = rec.correo_pri
+                rec.partner_name = rec.nombre_padre
+                rec.phone  = rec.movil_padre
+            elif rec.titular_cuenta == 'Madre':
+                rec.email_from = rec.correo_secun
+                rec.partner_name = rec.nombre_madre
+                rec.phone  = rec.movil_madre
 
     # _sql_constraints = [('id_alumo_int_unique', 'unique(id_alumno_int)', 'Este alumno ya esta registrado!')]
 
