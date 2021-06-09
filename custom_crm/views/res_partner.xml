@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- res.partner inherit form view -->
+    <record id="res_partner_inherit_view_form" model="ir.ui.view">
+        <field name="name">res.partner.inherit.view.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='sales_purchases']" position="after">
+                <page name="date_student" string="Informacion del alumno">
+                    <group name="container_row_2">
+                        
+                            <group>
+                                <field name="receta"/>
+                                <field name="income_type"/>
+                                <field name="gender"/>
+                                <field name="account_holder"/>
+                                
+                                <field name="type_transport"/>
+                                <field name="origin"/>
+                                <!-- <field name="receta"/> -->
+                            </group>
+                            
+                            <group>
+                                <field name="date_birth"/>
+                                <field name="age"/>
+                                <field name="tipo_sangre"/>
+                                <field name="curso_id"/>
+                                <field name="modalidad_id"/>
+                                <field name="becado2"/>
+
+                            </group>
+                            
+                        
+                    </group>
+                </page>
+                <page name="date_student" string="Otra informacion">
+                    <group name="container_row_2">
+                            
+                            <group string = "Padre">
+                                <field name="father_name"/>
+                                <field name="correo_padre"/>
+                                <field name="fecha_padre"/>
+                                <field name="movil_padre"/>
+                                <field name="lugar_trb_padre"/>
+                                <field name="tel_padre"/>
+                               
+                            </group>
+                            
+                            <group string = "Madre">
+                                <field name="mother_name"/>
+                                <field name="correo_madre"/>
+                                <field name="fecha_madre"/>
+                                <field name="movil_madre"/>
+                                <field name="lugar_trb_madre"/>
+                                <field name="tel_madre"/>
+                            </group>
+                            <group string = "Encargado">
+                                <field name="encargado_id"/>
+                                <field name="encargado"/>
+                                <field name="encargado_movil"/>
+                                
+                               
+                            </group>
+
+                            <group string = "Materia retrasada">
+                                <field name="materia_retrasada_id"/>
+                                <field name="materia_retrasada"/>
+                                <field name="materia_retrasada_name"/>
+                            </group>
+                    </group>
+                </page>
+            </xpath>
+            
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_details_inherit">
+        <t t-call="portal.portal_layout">
+            <t t-set="additional_title">Contact Details</t>
+            <!-- <h6>Esta es la vista inherit</h6> -->
+            <form action="/my/account" method="post">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <div class="row o_portal_details">
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <t t-set="partner_can_edit_vat" t-value="partner.can_edit_vat()"/>
+                            <div class="col-lg-12">
+                              <div t-if="error_message" class="alert alert-danger" role="alert">
+                                  <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                              </div>
+                            </div>
+                            <div t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="name">Nombre</label>
+                                <input type="text" name="name" t-attf-class="form-control #{error.get('name') and 'is-invalid' or ''}" t-att-value="name or partner.name" />
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('date_birth') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="name">Fecha de nacimiento</label>
+                                <input type="date" name="date_birth" t-attf-class="form-control #{error.get('date_birth') and 'is-invalid' or ''}" t-att-value="date_birth or partner.date_birth" />
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('email') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="email">Email</label>
+                                <input type="email" name="email" t-attf-class="form-control #{error.get('email') and 'is-invalid' or ''}" t-att-value="email or partner.email" />
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('origin') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="email">Institución de procedencia</label>
+                                <input type="origin" name="origin" t-attf-class="form-control #{error.get('origin') and 'is-invalid' or ''}" t-att-value="origin or partner.origin" />
+                            </div>
+
+                            <div class="clearfix" />
+                            <!-- <div t-attf-class="form-group #{error.get('company_name') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="company_name">Company Name</label>
+                                The <input> is replace by a <p> to avoid sending an unauthorized value on form submit.
+                                     The user might not have rights to change company_name but should still be able to see it.
+                                
+                                <p t-if="not partner_can_edit_vat" t-attf-class="form-control" readonly="1" t-esc="partner.commercial_company_name" title="Changing company name is not allowed once document(s) have been issued for your account. Please contact us directly for this operation."/>
+                                <input t-else="" type="text" name="company_name" t-attf-class="form-control #{error.get('company_name') and 'is-invalid' or ''}" t-att-value="company_name or partner.commercial_company_name"/>
+                            </div> -->
+                            <!-- <div t-attf-class="form-group #{error.get('vat') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="vat">VAT Number</label>
+                                <t t-set="vat_not_editable_message">Changing VAT number is not allowed once document(s) have been issued for your account. Please contact us directly for this operation.</t>
+                                <input type="text" name="vat" t-attf-class="form-control #{error.get('vat') and 'is-invalid' or ''}" t-att-value="vat or partner.vat" t-att-readonly="None if partner_can_edit_vat else '1'" t-att-title="None if partner_can_edit_vat else vat_not_editable_message" />
+                            </div> -->
+                            <!-- <div t-attf-class="form-group #{error.get('phone') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="phone">Phone</label>
+                                <input type="tel" name="phone" t-attf-class="form-control #{error.get('phone') and 'is-invalid' or ''}" t-att-value="phone or partner.phone" />
+                            </div> -->
+
+                            <div class="clearfix" />
+                            <!-- <div t-attf-class="form-group #{error.get('street') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="street">Street</label>
+                                <input type="text" name="street" t-attf-class="form-control #{error.get('street') and 'is-invalid' or ''}" t-att-value="street or partner.street"/>
+                            </div> -->
+                            <!-- <div t-attf-class="form-group #{error.get('city') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="city">City</label>
+                                <input type="text" name="city" t-attf-class="form-control #{error.get('city') and 'is-invalid' or ''}" t-att-value="city or partner.city" />
+                            </div> -->
+                            <!-- <div t-attf-class="form-group #{error.get('zip') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="zipcode">Zip / Postal Code</label>
+                                <input type="text" name="zipcode" t-attf-class="form-control #{error.get('zip') and 'is-invalid' or ''}" t-att-value="zipcode or partner.zip" />
+                            </div> -->
+                            
+                            
+                            <div t-attf-class="form-group #{error.get('country_id') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="country_id">Pais</label>
+                                <select name="country_id" t-attf-class="form-control #{error.get('country_id') and 'is-invalid' or ''}">
+                                    <option value="">Country...</option>
+                                    <t t-foreach="countries or []" t-as="country">
+                                        <option t-att-value="country.id" t-att-selected="country.id == int(country_id) if country_id else country.id == partner.country_id.id">
+                                            <t t-esc="country.name" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('income_type') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="country_id">Tipo de ingreso</label>
+                                <select name="income_type" t-attf-class="form-control #{error.get('income_type') and 'is-invalid' or ''}">
+                                    
+                                    <t t-foreach="income_type or []" t-as="type">
+                                        <option t-att-value="type" t-att-selected="type == partner.income_type" >
+                                            <t t-esc="type" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('becado2') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="country_id">Becado</label>
+                                <select name="becado2" t-attf-class="form-control #{error.get('becado2') and 'is-invalid' or ''}">
+                                    
+                                    <t t-foreach="becado2 or []" t-as="type">
+                                        <option t-att-value="type" t-att-selected="type == partner.becado2" >
+                                            <t t-esc="type" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('tipo_sangre') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="country_id">Tipo de sangre</label>
+                                <select name="tipo_sangre" t-attf-class="form-control #{error.get('tipo_sangre') and 'is-invalid' or ''}">
+                                    
+                                    <t t-foreach="tipo_sangre or []" t-as="type">
+                                        <option t-att-value="type" t-att-selected="type == partner.tipo_sangre" >
+                                            <t t-esc="type" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('account_holder') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="country_id">Responsable de los pagos</label>
+                                <select name="account_holder" t-attf-class="form-control #{error.get('account_holder') and 'is-invalid' or ''}">
+                                    
+                                    <t t-foreach="account_holder or []" t-as="type">
+                                        <option t-att-value="type" t-att-selected="type == partner.account_holder" >
+                                            <t t-esc="type" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('curso_id') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="country_id">Curso</label>
+                                <select name="curso_id" t-attf-class="form-control #{error.get('curso_id') and 'is-invalid' or ''}">
+                                    
+                                    <t t-foreach="cursos or []" t-as="type">
+                                        <option t-att-value="type.id" t-att-selected="type.id == partner.curso_id.id" >
+                                            <t t-esc="type.name" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                                <div t-attf-class="form-group #{error.get('modalidad') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="country_id">Modalidad</label>
+                                <select name="modalidad_id" t-attf-class="form-control #{error.get('curso_id') and 'is-invalid' or ''}">
+                                    
+                                    <t t-foreach="modalidad or []" t-as="type">
+                                        <option t-att-value="type.id" t-att-selected="type.id == partner.modalidad_id.id" >
+                                            <t t-esc="type.name" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('type_transport') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="country_id">Tipo de Transporte</label>
+                                <select name="type_transport" t-attf-class="form-control #{error.get('type_transport') and 'is-invalid' or ''}">
+                                    
+                                    <t t-foreach="type_transport or []" t-as="type">
+                                        <option t-att-value="type" t-att-selected="type == partner.type_transport">
+                                            <t t-esc="type" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('padecimiento') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="zipcode">Padecimiento</label>
+                                <input type="text" name="padecimiento" t-attf-class="form-control #{error.get('padecimiento') and 'is-invalid' or ''}" t-att-value="padecimiento or partner.padecimiento" />
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('receta') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="zipcode">Receta</label>
+                                <input type="text" name="receta" t-attf-class="form-control #{error.get('receta') and 'is-invalid' or ''}" t-att-value="receta or partner.receta" />
+                            </div>
+
+
+                            <!-- <div t-attf-class="form-group #{error.get('state_id') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="state_id">State / Province</label>
+                                <select name="state_id" t-attf-class="form-control #{error.get('state_id') and 'is-invalid' or ''}">
+                                    <option value="">select...</option>
+                                    <t t-foreach="states or []" t-as="state">
+                                        <option t-att-value="state.id" style="display:none;" t-att-data-country_id="state.country_id.id" t-att-selected="state.id == partner.state_id.id">
+                                            <t t-esc="state.name" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div> -->
+                            <input type="hidden" name="redirect" t-att-value="redirect"/>
+                        </div>
+                        <div class="clearfix">
+                            <button type="submit" class="btn btn-primary float-right mb32 ">
+                                Confirmar
+                                <span class="fa fa-long-arrow-right" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </t>
+    </template>
+
+
+
+    <template id="portal_my_details_inherit_parents">
+        <t t-call="portal.portal_layout">
+            <t t-set="additional_title">parents Details</t>
+            <!-- <h6>Vista parent</h6> -->
+            <form action="/my/account" method="post">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <div class="row o_portal_details">
+                    <div class="col-lg-8">
+                        <h4 style = "text-align:center">Padre</h4>   
+                        <hr/>
+                        <div class="row">
+                            <t t-set="partner_can_edit_vat" t-value="partner.can_edit_vat()"/>
+                            <div class="col-lg-12">
+                              <div t-if="error_message" class="alert alert-danger" role="alert">
+                                  <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                              </div>
+                            </div>
+                            
+                            <div t-attf-class="form-group #{error.get('id_padre') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Identidad</label>
+                                <input type="text" name="id_padre" t-attf-class="form-control #{error.get('id_padre') and 'is-invalid' or ''}" t-att-value="id_padre or partner.id_padre" />
+                            </div>
+                            <div t-attf-class="form-group #{error.get('father_name') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Nombre del Padre</label>
+                                <input type="text" name="father_name" t-attf-class="form-control #{error.get('father_name') and 'is-invalid' or ''}" t-att-value="father_name or partner.father_name" />
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('fecha_padre') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Fecha de nacimiento</label>
+                                <input type="date" name="fecha_padre" t-attf-class="form-control #{error.get('fecha_padre') and 'is-invalid' or ''}" t-att-value="fecha_padre or partner.fecha_padre" />
+                            </div>
+                            <div t-attf-class="form-group #{error.get('tel_padre') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Teléfono del trabajo</label>
+                                <input type="text" name="tel_padre" t-attf-class="form-control #{error.get('tel_padre') and 'is-invalid' or ''}" t-att-value="tel_padre or partner.tel_padre" />
+                            </div>
+                            <div t-attf-class="form-group #{error.get('correo_padre') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Correo del Padre</label>
+                                <input type="text" name="correo_padre" t-attf-class="form-control #{error.get('correo_padre') and 'is-invalid' or ''}" t-att-value="correo_padre or partner.correo_padre" />
+                            </div>
+                            <div t-attf-class="form-group #{error.get('movil_padre') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Móvil</label>
+                                <input type="text" name="movil_padre" t-attf-class="form-control #{error.get('movil_padre') and 'is-invalid' or ''}" t-att-value="movil_padre or partner.movil_padre" />
+                            </div>
+                            <div t-attf-class="form-group #{error.get('lugar_trb_padre') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Lugar de trabajo</label>
+                                <input type="text" name="lugar_trb_padre" t-attf-class="form-control #{error.get('lugar_trb_padre') and 'is-invalid' or ''}" t-att-value="lugar_trb_padre or partner.lugar_trb_padre" />
+                            </div>
+
+                           
+                            <input type="hidden" name="redirect" t-att-value="redirect"/>
+                        </div>
+                        
+                        <h4 style = "text-align:center">Madre</h4>   
+                        <hr/>
+                        <div class="row">
+                            <t t-set="partner_can_edit_vat" t-value="partner.can_edit_vat()"/>
+                            <div class="col-lg-12">
+                              <div t-if="error_message" class="alert alert-danger" role="alert">
+                                  <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                              </div>
+                            </div>
+                            
+                            <div t-attf-class="form-group #{error.get('id_madre') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Identidad</label>
+                                <input type="text" name="id_madre" t-attf-class="form-control #{error.get('id_madre') and 'is-invalid' or ''}" t-att-value="id_madre or partner.id_madre" />
+                            </div>
+                            
+                            <div t-attf-class="form-group #{error.get('mother_name') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Nombre de la Madre</label>
+                                <input type="text" name="mother_name" t-attf-class="form-control #{error.get('mother_name') and 'is-invalid' or ''}" t-att-value="mother_name or partner.mother_name" />
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('fecha_madre') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Fecha de nacimiento</label>
+                                <input type="date" name="fecha_madre" t-attf-class="form-control #{error.get('fecha_madre') and 'is-invalid' or ''}" t-att-value="fecha_madre or partner.fecha_madre" />
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('tel_madre') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Teléfono del trabajo</label>
+                                <input type="text" name="tel_madre" t-attf-class="form-control #{error.get('tel_madre') and 'is-invalid' or ''}" t-att-value="tel_madre or partner.tel_madre" />
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('correo_madre') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Correo de la Madre</label>
+                                <input type="text" name="correo_madre" t-attf-class="form-control #{error.get('correo_madre') and 'is-invalid' or ''}" t-att-value="correo_madre or partner.correo_madre" />
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('movil_madre') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Móvil</label>
+                                <input type="text" name="movil_madre" t-attf-class="form-control #{error.get('movil_madre') and 'is-invalid' or ''}" t-att-value="movil_madre or partner.movil_madre" />
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('lugar_trb_madre') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Lugar de trabajo</label>
+                                <input type="text" name="lugar_trb_madre" t-attf-class="form-control #{error.get('lugar_trb_madre') and 'is-invalid' or ''}" t-att-value="lugar_trb_madre or partner.lugar_trb_madre" />
+                            </div>
+
+                           
+                            <input type="hidden" name="redirect" t-att-value="redirect"/>
+                        </div>
+
+                        <h4 style = "text-align:center">Encargado</h4>   
+                        <hr/>
+                        <div class="row">
+                            <t t-set="partner_can_edit_vat" t-value="partner.can_edit_vat()"/>
+                            <div class="col-lg-12">
+                              <div t-if="error_message" class="alert alert-danger" role="alert">
+                                  <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                              </div>
+                            </div>
+                            
+                            <div t-attf-class="form-group #{error.get('encargado_id') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Identidad</label>
+                                <input type="text" name="encargado_id" t-attf-class="form-control #{error.get('encargado_id') and 'is-invalid' or ''}" t-att-value="encargado_id or partner.encargado_id" />
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('encargado') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Nombre</label>
+                                <input type="text" name="encargado" t-attf-class="form-control #{error.get('encargado') and 'is-invalid' or ''}" t-att-value="encargado or partner.encargado" />
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('encargado_movil') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Móvil</label>
+                                <input type="text" name="encargado_movil" t-attf-class="form-control #{error.get('encargado_movil') and 'is-invalid' or ''}" t-att-value="encargado_movil or partner.encargado_movil" />
+                            </div>
+
+                            <input type="hidden" name="redirect" t-att-value="redirect"/>
+                        </div>
+                        
+                        <h4 style = "text-align:center">Materia Retrasada</h4>   
+                        <hr/>
+                        <div class="row">
+                            <t t-set="partner_can_edit_vat" t-value="partner.can_edit_vat()"/>
+                            <div class="col-lg-12">
+                              <div t-if="error_message" class="alert alert-danger" role="alert">
+                                  <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                              </div>
+                            </div>
+                            
+                            <div t-attf-class="form-group #{error.get('materia_retrasada') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Materia</label>
+                                <input type="text" name="materia_retrasada" t-attf-class="form-control #{error.get('materia_retrasada') and 'is-invalid' or ''}" t-att-value="materia_retrasada or partner.materia_retrasada" />
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('materia_retrasada_id') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">ID</label>
+                                <input type="text" name="materia_retrasada_id" t-attf-class="form-control #{error.get('materia_retrasada_id') and 'is-invalid' or ''}" t-att-value="materia_retrasada_id or partner.materia_retrasada_id" />
+                            </div>
+
+                            <div t-attf-class="form-group #{error.get('materia_retrasada_name') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="name">Nombre</label>
+                                <input type="text" name="materia_retrasada_name" t-attf-class="form-control #{error.get('materia_retrasada_name') and 'is-invalid' or ''}" t-att-value="materia_retrasada_name or partner.materia_retrasada_name" />
+                            </div>
+
+                            <input type="hidden" name="redirect" t-att-value="redirect"/>
+                        </div>
+                        
+                        <div class="clearfix">
+                            <button type="submit" class="btn btn-primary float-right mb32 ">
+                                Confirmar
+                                <span class="fa fa-long-arrow-right" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </t>
+    </template>
+</odoo>
