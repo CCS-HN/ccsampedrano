@@ -20,13 +20,16 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','crm'],
+    'depends': ['base','crm','portal'],
 
     # always loaded
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
+        'views/portal_layout.xml',
         'views/views.xml',
         'views/templates.xml',
+        'views/res_partner.xml',
+        'views/portal_my_details.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
