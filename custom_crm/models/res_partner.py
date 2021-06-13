@@ -12,8 +12,8 @@ class resPartner(models.Model):
     receta = fields.Text(string='receta')
     padecimiento = fields.Text(string='Padecimiento')
     
-    income_type = fields.Selection([('Reingreso', 'Re-ingreso'), ('PrimerIngreso', 'Primer Ingreso'),('Traslado', 'Traslado')],required=True, string = "Tipo de ingreso")
-    gender = fields.Selection([('M', 'Masculino'), ('F', 'Femenino')],required=True, string = "Genero")    
+    income_type = fields.Selection([('Re-ingreso', 'Re-ingreso'), ('Primer Ingreso', 'Primer Ingreso'),('Traslado', 'Traslado')],required=True, string = "Tipo de ingreso")
+    gender = fields.Selection([('Masculino', 'Masculino'), ('Femenino', 'Femenino')],required=True, string = "Genero")    
     account_holder = fields.Selection([('Padre', 'Padre'), ('Madre', 'Madre'),('Encargado', 'Encargado')],required=True, string = "Responsable de los pagos")
     type_transport = fields.Selection([('Familiar', 'Familiar'), ('Privado', 'Privado'),('Publico','Publico')],required=True, string = "Tipo de transporte" )
     origin = fields.Char(string='Institucion de procedencia')
@@ -56,8 +56,6 @@ class resPartner(models.Model):
 
     def get_age(self):
         for rec in self:
-            
-            #print(' edad -------------->', relativedelta(datetime.now(), rec.date_birth).years)
             rec.age = relativedelta(datetime.now(), rec.date_birth).years
             
 
