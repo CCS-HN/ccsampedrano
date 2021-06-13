@@ -448,7 +448,7 @@ class CustomerPortalInherit(CustomerPortal):
                
                 partner.sudo().write(values)
                 
-                request.env['crm.lead'].create({
+                request.env['crm.lead'].sudo().create({
                     'name': partner.name + ' opportunity',
                     'nombre_alumno': partner.name,
                     'correo_del_estudiante':partner.email,
