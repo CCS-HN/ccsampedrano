@@ -7,6 +7,27 @@
                 <div class="oe_structure" id="oe_structure_portal_my_home_1"/>
                 <h3>Documentos</h3>
                 <div class="o_portal_docs list-group">
+                    <t t-call="portal.portal_docs_entry">
+                        <t t-set="title">Pre-Matrícula</t>
+                        <t t-set="url" t-value="'/my/account/parents'"/>
+                    </t>
+                    
+                    
+                    <t t-call="portal.portal_docs_entry">
+                        <t t-set="title">Presupuestos</t>
+                        <t t-set="url" t-value="'/my/quotes'"/>
+                        <t t-set="placeholder_count" t-value="'quotation_count'"/>
+                    </t>
+                    <t t-call="portal.portal_docs_entry">
+                        <t t-set="title">Pedidos de ventas</t>
+                        <t t-set="url" t-value="'/my/orders'"/>
+                        <t t-set="placeholder_count" t-value="'order_count'"/>
+                    </t>
+                    <t t-call="portal.portal_docs_entry">
+                        <t t-set="title">Facturas</t>
+                        <t t-set="url" t-value="'/my/invoices'"/>
+                        <t t-set="placeholder_count" t-value="'invoice_count'"/>
+                    </t>
                 </div>
             </div>
             <div class="oe_structure" id="oe_structure_portal_my_home_2"/>
@@ -40,7 +61,9 @@
                                 </div>
                                 <div class="o_portal_my_details">
                                     <h4>Detalles <a role="button" href="/my/account" class="btn btn-sm btn-link"><i class="fa fa-pencil"/> Editar</a></h4>
-                                    <a role="button" href="/my/account/parents" class="btn btn-sm btn-link"><i class="fa fa-pencil"/> Editar otra información</a>
+                                    
+                                    <!-- <a role="button" href="/my/account/parents" class="btn btn-sm btn-link"><i class="fa fa-pencil"/> Editar otra información</a> -->
+                                    
                                     <hr class="mt-1 mb-0"/>
                                     <div t-field="user_id.partner_id" t-options='{"widget": "contact", "fields": ["phone","email","name"]}'/>
                                 </div>

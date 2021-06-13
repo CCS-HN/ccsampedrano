@@ -69,18 +69,36 @@
                             </div> -->
                             
                             
-                            <div t-attf-class="form-group #{error.get('country_id') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label" for="country_id">Pais</label>
-                                <select name="country_id" t-attf-class="form-control #{error.get('country_id') and 'is-invalid' or ''}">
+                            <div t-attf-class="form-group #{error.get('countries') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="countries">Pais</label>
+                                <select name="countries" t-attf-class="form-control #{error.get('countries') and 'is-invalid' or ''}">
                                     <option value="">Country...</option>
                                     <t t-foreach="countries or []" t-as="country">
-                                        <option t-att-value="country.id" t-att-selected="country.id == int(country_id) if country_id else country.id == partner.country_id.id">
+                                        <option t-att-value="country.id" t-att-selected="country.id == partner.country_id.id">
                                             <t t-esc="country.name" />
                                         </option>
                                     </t>
                                 </select>
                             </div>
 
+                            <div t-attf-class="form-group #{error.get('street') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="name">Direccion</label>
+                                <input type="text" name="street" t-attf-class="form-control #{error.get('street') and 'is-invalid' or ''}" t-att-value="street or partner.street" />
+                            </div>
+
+                            
+                            <div t-attf-class="form-group #{error.get('gender') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="country_id">Genero</label>
+                                <select name="gender" t-attf-class="form-control #{error.get('gender') and 'is-invalid' or ''}">
+                                    <t t-foreach="gender or []" t-as="type">
+                                        <option t-att-value="type" t-att-selected="type == partner.gender" >
+                                            <t t-esc="type" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                            
+                            
                             <div t-attf-class="form-group #{error.get('income_type') and 'o_has_error' or ''} col-xl-6">
                                 <label class="col-form-label" for="country_id">Tipo de ingreso</label>
                                 <select name="income_type" t-attf-class="form-control #{error.get('income_type') and 'is-invalid' or ''}">
@@ -175,8 +193,8 @@
                             </div>
 
 
-                            <!-- <div t-attf-class="form-group #{error.get('state_id') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="state_id">State / Province</label>
+                            <div t-attf-class="form-group #{error.get('state_id') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label label-optional" for="state_id">estados</label>
                                 <select name="state_id" t-attf-class="form-control #{error.get('state_id') and 'is-invalid' or ''}">
                                     <option value="">select...</option>
                                     <t t-foreach="states or []" t-as="state">
@@ -185,7 +203,7 @@
                                         </option>
                                     </t>
                                 </select>
-                            </div> -->
+                            </div>
                             <input type="hidden" name="redirect" t-att-value="redirect"/>
                         </div>
                         <div class="clearfix">
@@ -199,175 +217,326 @@
             </form>
         </t>
     </template>
+    
 
 
-
-    <template id="portal_my_details_inherit_parents">
-        <t t-call="portal.portal_layout">
-            <t t-set="additional_title">parents Details</t>
-            <!-- <h6>Vista parent</h6> -->
-            <form action="/my/account" method="post">
-                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                <div class="row o_portal_details">
-                    <div class="col-lg-8">
-                        <h4 style = "text-align:center">Padre</h4>   
-                        <hr/>
-                        <div class="row">
-                            <t t-set="partner_can_edit_vat" t-value="partner.can_edit_vat()"/>
-                            <div class="col-lg-12">
-                              <div t-if="error_message" class="alert alert-danger" role="alert">
-                                  <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
-                              </div>
-                            </div>
+    <template id="portal_my_details_inherit_parents" >
+        <t t-name="details_inherit_parents">
+            <t t-call="portal.portal_layout">
+                <t t-set="additional_title">parents Details</t>
+                <!-- <h6>Vista parent</h6> -->
+                <form action="/my/account/parents" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="row o_portal_details">
+                        <!-- <button id="page">Instalar</button> -->
+                        <ul style ="padding-top: 15px; padding-bottom: 15px; width: 852px; list-style: none; display: inline; float: left; margin:auto" > 
+                            <li t-if= "not part" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;"><div  id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;"  href='/my/account/parents'>Padre</div></li>
+                            <li t-if= "part" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;"><div  id ="page" style ="width: 100px; color: white; display: block ;background: red; border: 1px Solid #000; text-decoration: none;"  href='/my/account/parents'>Padre</div></li>
                             
-                            <div t-attf-class="form-group #{error.get('id_padre') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Identidad</label>
-                                <input type="text" name="id_padre" t-attf-class="form-control #{error.get('id_padre') and 'is-invalid' or ''}" t-att-value="id_padre or partner.id_padre" />
-                            </div>
-                            <div t-attf-class="form-group #{error.get('father_name') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Nombre del Padre</label>
-                                <input type="text" name="father_name" t-attf-class="form-control #{error.get('father_name') and 'is-invalid' or ''}" t-att-value="father_name or partner.father_name" />
-                            </div>
 
-                            <div t-attf-class="form-group #{error.get('fecha_padre') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Fecha de nacimiento</label>
-                                <input type="date" name="fecha_padre" t-attf-class="form-control #{error.get('fecha_padre') and 'is-invalid' or ''}" t-att-value="fecha_padre or partner.fecha_padre" />
-                            </div>
-                            <div t-attf-class="form-group #{error.get('tel_padre') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Teléfono del trabajo</label>
-                                <input type="text" name="tel_padre" t-attf-class="form-control #{error.get('tel_padre') and 'is-invalid' or ''}" t-att-value="tel_padre or partner.tel_padre" />
-                            </div>
-                            <div t-attf-class="form-group #{error.get('correo_padre') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Correo del Padre</label>
-                                <input type="text" name="correo_padre" t-attf-class="form-control #{error.get('correo_padre') and 'is-invalid' or ''}" t-att-value="correo_padre or partner.correo_padre" />
-                            </div>
-                            <div t-attf-class="form-group #{error.get('movil_padre') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Móvil</label>
-                                <input type="text" name="movil_padre" t-attf-class="form-control #{error.get('movil_padre') and 'is-invalid' or ''}" t-att-value="movil_padre or partner.movil_padre" />
-                            </div>
-                            <div t-attf-class="form-group #{error.get('lugar_trb_padre') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Lugar de trabajo</label>
-                                <input type="text" name="lugar_trb_padre" t-attf-class="form-control #{error.get('lugar_trb_padre') and 'is-invalid' or ''}" t-att-value="lugar_trb_padre or partner.lugar_trb_padre" />
-                            </div>
+                            <li t-if= "not mother" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><button type="submit" id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;" href='/my/account/motherM'>Madre</button></li>
+                            <li t-if= "mother" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><div id ="page" style ="width: 100px; color: white; display: block;background: red; border: 1px Solid #000; text-decoration: none;" href='/my/account/motherM'>Madre</div></li>
+                            
 
+                            <li t-if= "not encar" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><div id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;" href='/my/account/encargado'>Encargado</div></li>
+                            <li t-if= "encar" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><div id ="page" style ="width: 100px; color: white; display: block;background: red; border: 1px Solid #000; text-decoration: none;" href='/my/account/encargado'>Encargado</div></li>
+                            
+
+                            <li t-if= "not materia" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><div id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;" href='/my/account/materia'>Materia</div></li> 
+                            <li t-if= "materia" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><div id ="page" style ="width: 100px; color: white; display: block;background: red; border: 1px Solid #000; text-decoration: none;" href='/my/account/materia'>Materia</div></li> 
+                        
+                        </ul>
+                        
+                        
+                        <div class="col-lg-8">
+                            <h4 style = "text-align:center">Padre</h4>   
+                            <hr/>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                <div t-if="error_message" class="alert alert-danger" role="alert">
+                                    <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                                </div>
+                                </div>
+                                
+                                <div t-attf-class="form-group #{error.get('id_padre') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Identidad</label>
+                                    <input type="text" name="id_padre" t-attf-class="form-control #{error.get('id_padre') and 'is-invalid' or ''}" t-att-value="id_padre or partner.id_padre" />
+                                </div>
+                                <div t-attf-class="form-group #{error.get('father_name') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Nombre del Padre</label>
+                                    <input type="text" name="father_name" t-attf-class="form-control #{error.get('father_name') and 'is-invalid' or ''}" t-att-value="father_name or partner.father_name" />
+                                </div>
+
+                                <div t-attf-class="form-group #{error.get('fecha_padre') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Fecha de nacimiento</label>
+                                    <input type="date" name="fecha_padre" t-attf-class="form-control #{error.get('fecha_padre') and 'is-invalid' or ''}" t-att-value="fecha_padre or partner.fecha_padre" />
+                                </div>
+                                <div t-attf-class="form-group #{error.get('tel_padre') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Teléfono del trabajo</label>
+                                    <input type="text" name="tel_padre" t-attf-class="form-control #{error.get('tel_padre') and 'is-invalid' or ''}" t-att-value="tel_padre or partner.tel_padre" />
+                                </div>
+                                <div t-attf-class="form-group #{error.get('correo_padre') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Correo del Padre</label>
+                                    <input type="text" name="correo_padre" t-attf-class="form-control #{error.get('correo_padre') and 'is-invalid' or ''}" t-att-value="correo_padre or partner.correo_padre" />
+                                </div>
+                                <div t-attf-class="form-group #{error.get('movil_padre') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Móvil</label>
+                                    <input type="text" name="movil_padre" t-attf-class="form-control #{error.get('movil_padre') and 'is-invalid' or ''}" t-att-value="movil_padre or partner.movil_padre" />
+                                </div>
+                                <div t-attf-class="form-group #{error.get('lugar_trb_padre') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Lugar de trabajo</label>
+                                    <input type="text" name="lugar_trb_padre" t-attf-class="form-control #{error.get('lugar_trb_padre') and 'is-invalid' or ''}" t-att-value="lugar_trb_padre or partner.lugar_trb_padre" />
+                                </div>
+
+                            
+                                <input type="hidden" name="redirect" t-att-value="redirect"/>
+                            </div>
                            
-                            <input type="hidden" name="redirect" t-att-value="redirect"/>
-                        </div>
-                        
-                        <h4 style = "text-align:center">Madre</h4>   
-                        <hr/>
-                        <div class="row">
-                            <t t-set="partner_can_edit_vat" t-value="partner.can_edit_vat()"/>
-                            <div class="col-lg-12">
-                              <div t-if="error_message" class="alert alert-danger" role="alert">
-                                  <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
-                              </div>
-                            </div>
                             
-                            <div t-attf-class="form-group #{error.get('id_madre') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Identidad</label>
-                                <input type="text" name="id_madre" t-attf-class="form-control #{error.get('id_madre') and 'is-invalid' or ''}" t-att-value="id_madre or partner.id_madre" />
+                            <div class="clearfix">
+                                <button type="submit" class="btn btn-primary float-right mb32 ">
+                                    Siguiente
+                                    <span class="fa fa-long-arrow-right" />
+                                </button>
                             </div>
-                            
-                            <div t-attf-class="form-group #{error.get('mother_name') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Nombre de la Madre</label>
-                                <input type="text" name="mother_name" t-attf-class="form-control #{error.get('mother_name') and 'is-invalid' or ''}" t-att-value="mother_name or partner.mother_name" />
-                            </div>
-
-                            <div t-attf-class="form-group #{error.get('fecha_madre') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Fecha de nacimiento</label>
-                                <input type="date" name="fecha_madre" t-attf-class="form-control #{error.get('fecha_madre') and 'is-invalid' or ''}" t-att-value="fecha_madre or partner.fecha_madre" />
-                            </div>
-
-                            <div t-attf-class="form-group #{error.get('tel_madre') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Teléfono del trabajo</label>
-                                <input type="text" name="tel_madre" t-attf-class="form-control #{error.get('tel_madre') and 'is-invalid' or ''}" t-att-value="tel_madre or partner.tel_madre" />
-                            </div>
-
-                            <div t-attf-class="form-group #{error.get('correo_madre') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Correo de la Madre</label>
-                                <input type="text" name="correo_madre" t-attf-class="form-control #{error.get('correo_madre') and 'is-invalid' or ''}" t-att-value="correo_madre or partner.correo_madre" />
-                            </div>
-
-                            <div t-attf-class="form-group #{error.get('movil_madre') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Móvil</label>
-                                <input type="text" name="movil_madre" t-attf-class="form-control #{error.get('movil_madre') and 'is-invalid' or ''}" t-att-value="movil_madre or partner.movil_madre" />
-                            </div>
-
-                            <div t-attf-class="form-group #{error.get('lugar_trb_madre') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Lugar de trabajo</label>
-                                <input type="text" name="lugar_trb_madre" t-attf-class="form-control #{error.get('lugar_trb_madre') and 'is-invalid' or ''}" t-att-value="lugar_trb_madre or partner.lugar_trb_madre" />
-                            </div>
-
-                           
-                            <input type="hidden" name="redirect" t-att-value="redirect"/>
-                        </div>
-
-                        <h4 style = "text-align:center">Encargado</h4>   
-                        <hr/>
-                        <div class="row">
-                            <t t-set="partner_can_edit_vat" t-value="partner.can_edit_vat()"/>
-                            <div class="col-lg-12">
-                              <div t-if="error_message" class="alert alert-danger" role="alert">
-                                  <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
-                              </div>
-                            </div>
-                            
-                            <div t-attf-class="form-group #{error.get('encargado_id') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Identidad</label>
-                                <input type="text" name="encargado_id" t-attf-class="form-control #{error.get('encargado_id') and 'is-invalid' or ''}" t-att-value="encargado_id or partner.encargado_id" />
-                            </div>
-
-                            <div t-attf-class="form-group #{error.get('encargado') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Nombre</label>
-                                <input type="text" name="encargado" t-attf-class="form-control #{error.get('encargado') and 'is-invalid' or ''}" t-att-value="encargado or partner.encargado" />
-                            </div>
-
-                            <div t-attf-class="form-group #{error.get('encargado_movil') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Móvil</label>
-                                <input type="text" name="encargado_movil" t-attf-class="form-control #{error.get('encargado_movil') and 'is-invalid' or ''}" t-att-value="encargado_movil or partner.encargado_movil" />
-                            </div>
-
-                            <input type="hidden" name="redirect" t-att-value="redirect"/>
-                        </div>
-                        
-                        <h4 style = "text-align:center">Materia Retrasada</h4>   
-                        <hr/>
-                        <div class="row">
-                            <t t-set="partner_can_edit_vat" t-value="partner.can_edit_vat()"/>
-                            <div class="col-lg-12">
-                              <div t-if="error_message" class="alert alert-danger" role="alert">
-                                  <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
-                              </div>
-                            </div>
-                            
-                            <div t-attf-class="form-group #{error.get('materia_retrasada') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Materia</label>
-                                <input type="text" name="materia_retrasada" t-attf-class="form-control #{error.get('materia_retrasada') and 'is-invalid' or ''}" t-att-value="materia_retrasada or partner.materia_retrasada" />
-                            </div>
-
-                            <div t-attf-class="form-group #{error.get('materia_retrasada_id') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">ID</label>
-                                <input type="text" name="materia_retrasada_id" t-attf-class="form-control #{error.get('materia_retrasada_id') and 'is-invalid' or ''}" t-att-value="materia_retrasada_id or partner.materia_retrasada_id" />
-                            </div>
-
-                            <div t-attf-class="form-group #{error.get('materia_retrasada_name') and 'o_has_error' or ''} col-xl-6">
-                                <label class="col-form-label label-optional" for="name">Nombre</label>
-                                <input type="text" name="materia_retrasada_name" t-attf-class="form-control #{error.get('materia_retrasada_name') and 'is-invalid' or ''}" t-att-value="materia_retrasada_name or partner.materia_retrasada_name" />
-                            </div>
-
-                            <input type="hidden" name="redirect" t-att-value="redirect"/>
-                        </div>
-                        
-                        <div class="clearfix">
-                            <button type="submit" class="btn btn-primary float-right mb32 ">
-                                Confirmar
-                                <span class="fa fa-long-arrow-right" />
-                            </button>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </t>
         </t>
     </template>
+
+    <template id="portal_my_details_inherit_mother" >
+        <t t-name="details_inherit_parents">
+            <t t-call="portal.portal_layout">
+                <t t-set="additional_title">parents Details</t>
+                <!-- <h6>Vista parent</h6> -->
+                <form id="form_mother" action="/my/account/mother" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="row o_portal_details">
+                        <!-- <button id="page">Instalar</button> -->
+                        <ul style ="padding-top: 15px; padding-bottom: 15px; width: 852px; list-style: none; display: inline; float: left; margin:auto" > 
+                            <li t-if= "not part" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;"><div id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;"  href='/my/account/parents'>Padre</div></li>
+                            <li t-if= "part" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;"><div id ="page" style ="width: 100px; color: white; display: block ;background: red; border: 1px Solid #000; text-decoration: none;"  href='/my/account/parents'>Padre</div></li>
+                            
+
+                            <li t-if= "not mother" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><div id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;" href='/my/account/mother'>Madre</div></li>
+                            <li t-if= "mother" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><div  id ="page" style ="width: 100px; color: white; display: block;background: red; border: 1px Solid #000; text-decoration: none;" href='/my/account/mother'>Madre</div></li>
+                            
+
+                            <li t-if= "not encar" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><button type="submit" id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;" href='/my/account/encargado'>Encargado</button></li>
+                            <li t-if= "encar" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><button type="submit" id ="page" style ="width: 100px; color: white; display: block;background: red; border: 1px Solid #000; text-decoration: none;" href='/my/account/encargado'>Encargado</button></li>
+                            
+
+                            <li t-if= "not materia" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><div id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;" href='/my/account/materia'>Materia</div></li> 
+                            <li t-if= "materia" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><div id ="page" style ="width: 100px; color: white; display: block;background: red; border: 1px Solid #000; text-decoration: none;" href='/my/account/materia'>Materia</div></li> 
+                        
+                        </ul>
+                        
+                        
+                        
+                        <div class="col-lg-8">
+                            
+                            <h4 style = "text-align:center">Madre</h4>   
+                            <hr/>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                <div t-if="error_message" class="alert alert-danger" role="alert">
+                                    <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                                </div>
+                                </div>
+                                
+                                <div t-attf-class="form-group #{error.get('id_madre') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Identidad</label>
+                                    <input type="text" name="id_madre" t-attf-class="form-control #{error.get('id_madre') and 'is-invalid' or ''}" t-att-value="id_madre or partner.id_madre" />
+                                </div>
+                                
+                                <div t-attf-class="form-group #{error.get('mother_name') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Nombre de la Madre</label>
+                                    <input type="text" name="mother_name" t-attf-class="form-control #{error.get('mother_name') and 'is-invalid' or ''}" t-att-value="mother_name or partner.mother_name" />
+                                </div>
+
+                                <div t-attf-class="form-group #{error.get('fecha_madre') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Fecha de nacimiento</label>
+                                    <input type="date" name="fecha_madre" t-attf-class="form-control #{error.get('fecha_madre') and 'is-invalid' or ''}" t-att-value="fecha_madre or partner.fecha_madre" />
+                                </div>
+
+                                <div t-attf-class="form-group #{error.get('tel_madre') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Teléfono del trabajo</label>
+                                    <input type="text" name="tel_madre" t-attf-class="form-control #{error.get('tel_madre') and 'is-invalid' or ''}" t-att-value="tel_madre or partner.tel_madre" />
+                                </div>
+
+                                <div t-attf-class="form-group #{error.get('correo_madre') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Correo de la Madre</label>
+                                    <input type="text" name="correo_madre" t-attf-class="form-control #{error.get('correo_madre') and 'is-invalid' or ''}" t-att-value="correo_madre or partner.correo_madre" />
+                                </div>
+
+                                <div t-attf-class="form-group #{error.get('movil_madre') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Móvil</label>
+                                    <input type="text" name="movil_madre" t-attf-class="form-control #{error.get('movil_madre') and 'is-invalid' or ''}" t-att-value="movil_madre or partner.movil_madre" />
+                                </div>
+
+                                <div t-attf-class="form-group #{error.get('lugar_trb_madre') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Lugar de trabajo</label>
+                                    <input type="text" name="lugar_trb_madre" t-attf-class="form-control #{error.get('lugar_trb_madre') and 'is-invalid' or ''}" t-att-value="lugar_trb_madre or partner.lugar_trb_madre" />
+                                </div>
+
+                            
+                                <input type="hidden" name="redirect" t-att-value="redirect"/>
+                            </div>
+
+                            <div class="clearfix">
+                                <button type="submit" class="btn btn-primary float-right mb32 ">
+                                    Siguiente
+                                    <span class="fa fa-long-arrow-right" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_my_details_inherit_encargado" >
+        <t t-name="details_inherit_parents">
+            <t t-call="portal.portal_layout">
+                <t t-set="additional_title">parents Details</t>
+                <!-- <h6>Vista parent</h6> -->
+                <form action="/my/account/encargado" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="row o_portal_details">
+                        <!-- <button id="page">Instalar</button> -->
+                        <ul style ="padding-top: 15px; padding-bottom: 15px; width: 852px; list-style: none; display: inline; float: left; margin:auto" > 
+                            <li t-if= "not part" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;"><div id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;"  href='/my/account/parents'>Padre</div></li>
+                            <li t-if= "part" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;"><div id ="page" style ="width: 100px; color: white; display: block ;background: red; border: 1px Solid #000; text-decoration: none;"  href='/my/account/parents'>Padre</div></li>
+                            
+
+                            <li t-if= "not mother" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><div id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;" href='/my/account/mother'>Madre</div></li>
+                            <li t-if= "mother" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><div id ="page" style ="width: 100px; color: white; display: block;background: red; border: 1px Solid #000; text-decoration: none;" href='/my/account/mother'>Madre</div></li>
+                            
+
+                            <li t-if= "not encar" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><div id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;" href='/my/account/encargado'>Encargado</div></li>
+                            <li t-if= "encar" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><div id ="page" style ="width: 100px; color: white; display: block;background: red; border: 1px Solid #000; text-decoration: none;" href='/my/account/encargado'>Encargado</div></li>
+                            
+
+                            <li t-if= "not materia" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><button type="submit" id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;" href='/my/account/materia'>Materia</button></li> 
+                            <li t-if= "materia" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><button type="submit" id ="page" style ="width: 100px; color: white; display: block;background: red; border: 1px Solid #000; text-decoration: none;" href='/my/account/materia'>Materia</button></li> 
+                        
+                        </ul>
+                        
+                        
+                        
+                        <div class="col-lg-8">
+                            <h4 style = "text-align:center">Encargado</h4>   
+                            <hr/>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                <div t-if="error_message" class="alert alert-danger" role="alert">
+                                    <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                                </div>
+                                </div>
+                                
+                                <div t-attf-class="form-group #{error.get('encargado_id') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Identidad</label>
+                                    <input type="text" name="encargado_id" t-attf-class="form-control #{error.get('encargado_id') and 'is-invalid' or ''}" t-att-value="encargado_id or partner.encargado_id" />
+                                </div>
+
+                                <div t-attf-class="form-group #{error.get('encargado') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Nombre</label>
+                                    <input type="text" name="encargado" t-attf-class="form-control #{error.get('encargado') and 'is-invalid' or ''}" t-att-value="encargado or partner.encargado" />
+                                </div>
+
+                                <div t-attf-class="form-group #{error.get('encargado_movil') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Móvil</label>
+                                    <input type="text" name="encargado_movil" t-attf-class="form-control #{error.get('encargado_movil') and 'is-invalid' or ''}" t-att-value="encargado_movil or partner.encargado_movil" />
+                                </div>
+
+                                <input type="hidden" name="redirect" t-att-value="redirect"/>
+                            </div>
+                            
+                         
+                            <div class="clearfix">
+                                <button type="submit" class="btn btn-primary float-right mb32 ">
+                                    Siguiente
+                                    <span class="fa fa-long-arrow-right" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_my_details_inherit_materia" >
+        <t t-name="details_inherit_parents">
+            <t t-call="portal.portal_layout">
+                <t t-set="additional_title">parents Details</t>
+                <!-- <h6>Vista parent</h6> -->
+                <form action="/my/account/materia" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="row o_portal_details">
+                        <!-- <button id="page">Instalar</button> -->
+                        <ul style ="padding-top: 15px; padding-bottom: 15px; width: 852px; list-style: none; display: inline; float: left; margin:auto" > 
+                            <li t-if= "not part" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;"><button type="submit" id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;"  href='/my/account/parents'>Padre</button></li>
+                            <li t-if= "part" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;"><button type="submit" id ="page" style ="width: 100px; color: white; display: block ;background: red; border: 1px Solid #000; text-decoration: none;"  href='/my/account/parents'>Padre</button></li>
+                            
+
+                            <li t-if= "not mother" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><button type="submit" id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;" href='/my/account/mother'>Madre</button></li>
+                            <li t-if= "mother" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><button type="submit" id ="page" style ="width: 100px; color: white; display: block;background: red; border: 1px Solid #000; text-decoration: none;" href='/my/account/mother'>Madre</button></li>
+                            
+
+                            <li t-if= "not encar" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><button type="submit" id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;" href='/my/account/encargado'>Encargado</button></li>
+                            <li t-if= "encar" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><button type="submit" id ="page" style ="width: 100px; color: white; display: block;background: red; border: 1px Solid #000; text-decoration: none;" href='/my/account/encargado'>Encargado</button></li>
+                            
+
+                            <li t-if= "not materia" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><button type="submit" id ="page" style ="width: 100px; color: white; display: block;background: #1919a5; border: 1px Solid #000; text-decoration: none;" href='/my/account/materia'>Materia</button></li> 
+                            <li t-if= "materia" style = "width: 100px; display: block; float: left; text-align: center; margin-right: 10px; position: relative; top: 1px;" ><button type="submit" id ="page" style ="width: 100px; color: white; display: block;background: red; border: 1px Solid #000; text-decoration: none;" href='/my/account/materia'>Materia</button></li> 
+                        
+                        </ul>
+                        
+                        
+                        <div class="col-lg-8">
+                            
+                            <h4 style = "text-align:center">Materia Retrasada</h4>   
+                            <hr/>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                <div t-if="error_message" class="alert alert-danger" role="alert">
+                                    <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
+                                </div>
+                                </div>
+                                
+                                <div t-attf-class="form-group #{error.get('materia_retrasada') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Materia</label>
+                                    <input type="text" name="materia_retrasada" t-attf-class="form-control #{error.get('materia_retrasada') and 'is-invalid' or ''}" t-att-value="materia_retrasada or partner.materia_retrasada" />
+                                </div>
+
+                                <div t-attf-class="form-group #{error.get('materia_retrasada_id') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">ID</label>
+                                    <input type="text" name="materia_retrasada_id" t-attf-class="form-control #{error.get('materia_retrasada_id') and 'is-invalid' or ''}" t-att-value="materia_retrasada_id or partner.materia_retrasada_id" />
+                                </div>
+
+                                <div t-attf-class="form-group #{error.get('materia_retrasada_name') and 'o_has_error' or ''} col-xl-6">
+                                    <label class="col-form-label label-optional" for="name">Nombre</label>
+                                    <input type="text" name="materia_retrasada_name" t-attf-class="form-control #{error.get('materia_retrasada_name') and 'is-invalid' or ''}" t-att-value="materia_retrasada_name or partner.materia_retrasada_name" />
+                                </div>
+
+                                <input type="hidden" name="redirect" t-att-value="redirect"/>
+                            </div>
+                            
+                            <div class="clearfix">
+                                <button type="submit" class="btn btn-primary float-right mb32 ">
+                                    Confirmar
+                                    <span class="fa fa-long-arrow-right" />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </t>
+        </t>
+    </template>
+
 </odoo>

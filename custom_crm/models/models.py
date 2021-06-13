@@ -19,7 +19,8 @@ class CRM(models.Model):
     edad = fields.Integer(required=True)
     direcc = fields.Char(required=True)
     fecha_nacimiento = fields.Date(required=True)
-    genero = fields.Selection([('M', 'Masculino'), ('F', 'Femenino')],required=True) 
+    
+    genero = fields.Selection([('Masculino', 'Masculino'), ('Femenino', 'Femenino')],required=True) 
     pais = fields.Many2one('res.country',required=True)
     alergias = fields.Text()
     padecimiento = fields.Text()
@@ -29,7 +30,7 @@ class CRM(models.Model):
     correo_pri = fields.Char()
     correo_del_estudiante = fields.Char(required=True)
     correo_secun = fields.Char()
-    tipo_ingreso = fields.Selection([('Reingreso', 'Re-ingreso'), ('PrimerIngreso', 'Primer Ingreso'),('Traslado', 'Traslado')],required=True)
+    tipo_ingreso = fields.Selection([('Re-ingreso', 'Re-ingreso'), ('Primer Ingreso', 'Primer Ingreso'),('Traslado', 'Traslado')],required=True)
     titular_cuenta = fields.Selection([('Padre', 'Padre'), ('Madre', 'Madre'),('Encargado', 'Encargado')],required=True)
 
     id_padre = fields.Char()
@@ -68,7 +69,7 @@ class CRM(models.Model):
     email = fields.Char()
     mas_info = fields.Text()
     rango_edad = fields.Selection([('9-12', '9-12'),('13-18', '13-18'),('9-12', '19-25'),('26-35', '26-35'),('36-40', '36-40'),('41-65', '41-65'),('>65', '>65')])
-    genero = fields.Selection([('M', 'Masculino'), ('F', 'Femenino')])
+    
     localidad = fields.Selection([('San Pedro Sula', 'San Pedro Sula'), ('Cofradia', 'Cofradia'),('Pimienta', 'Pimienta'),('Taulabe', 'Taulabe'),('Villanueva', 'Villanueva'),('San Manuel', 'San Manuel'),('Siguatepeque', 'Siguatepeque'),('El Progreso', 'El Progreso'),('Quimistan', 'Quimistan'),('Jesus de Otoro', 'Jesus de Otoro'),('Otro', 'Otro')])
     taller = fields.Selection([('Facebook', 'Facebook'), ('Instagram', 'Instagram'),('Pagina Web', 'Pagina Web'), ('Correo Electronico', 'Correo Electronico'),('WhatsApp', 'WhatsApp'),('Amigo/Familiar', 'Amigo/Familiar')])
     otro_taller  = fields.Selection([('Pintura', 'Pintura'), ('Musica', 'Musica'), ('Ingles', 'Ingles'), ('Vacacional de Conversacion ', 'Vacacional de Conversacion'),('Vacacional de Ingles para niños', 'Vacacional de Ingles para niños'),('Área académica (Pre Básica, Básica y Media)', 'Área académica (Pre Básica, Básica y Media)'),('Biblioteca', 'Biblioteca'),('Culturales', 'Culturales')])
