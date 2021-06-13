@@ -453,7 +453,7 @@ class CustomerPortalInherit(CustomerPortal):
                     'nombre_alumno': partner.name,
                     'correo_del_estudiante':partner.email,
                     'direcc':partner.street,
-                    'pais':partner.country_id.id,
+                    'pais':partner.country_id.id if partner.country_id else 96,
                     'padecimiento':partner.padecimiento,
                     'receta':partner.receta,
                     'becado2':partner.becado2,
@@ -566,7 +566,7 @@ class CustomerPortalInherit(CustomerPortal):
                 
                 
                 partner.curso_id = post['curso_id']
-                partner.country_id = post['countries']
+                partner.country_id = post['countries'] or False
                 partner.street = post['street']
                 partner.modalidad_id = post['modalidad_id']
                 partner.gender = post['gender']
