@@ -464,7 +464,7 @@ class CustomerPortalInherit(CustomerPortal):
                     'id_responsable_materia': partner.materia_retrasada_id,
                     'nombre_responsable_materia':partner.materia_retrasada_name,
                     
-                    'tipo_ingreso': partner.income_type,
+                    'tipo_ingreso': partner.income_type or 'Re-ingreso',
                     'becado2':partner.becado2,
                     'tipo_sangre':partner.tipo_sangre,
                     'titular_cuenta':partner.account_holder,
