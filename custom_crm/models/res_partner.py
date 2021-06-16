@@ -12,6 +12,7 @@ class resPartner(models.Model):
     receta = fields.Text(string='receta')
     padecimiento = fields.Text(string='Padecimiento')
     
+    id_alumno = fields.Char(char = 'Id Alumno', size=13)
     income_type = fields.Selection([('Re-ingreso', 'Re-ingreso'), ('Primer Ingreso', 'Primer Ingreso'),('Traslado', 'Traslado')],required=True, string = "Tipo de ingreso")
     gender = fields.Selection([('Masculino', 'Masculino'), ('Femenino', 'Femenino')],required=True, string = "Genero")    
     account_holder = fields.Selection([('Padre', 'Padre'), ('Madre', 'Madre'),('Encargado', 'Encargado')],required=True, string = "Responsable de los pagos")

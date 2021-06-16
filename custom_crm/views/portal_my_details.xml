@@ -15,6 +15,11 @@
                                   <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
                               </div>
                             </div>
+                            <div t-attf-class="form-group #{error.get('id_alumno') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="name">ID/RNE</label>
+                                <input type="text" name="id_alumno" t-attf-class="form-control #{error.get('id_alumno') and 'is-invalid' or ''}" t-att-value="id_alumno or partner.id_alumno" />
+                            </div>
+                            
                             <div t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} col-xl-6">
                                 <label class="col-form-label" for="name">Nombre</label>
                                 <input type="text" name="name" t-attf-class="form-control #{error.get('name') and 'is-invalid' or ''}" t-att-value="name or partner.name" />
@@ -258,6 +263,11 @@
                                   <t t-foreach="error_message" t-as="err"><t t-esc="err"/><br /></t>
                               </div>
                             </div>
+                            <div t-attf-class="form-group #{error.get('id_alumno') and 'o_has_error' or ''} col-xl-6">
+                                <label class="col-form-label" for="name">ID/RNE</label>
+                                <input type="text" name="id_alumno" t-attf-class="form-control #{error.get('id_alumno') and 'is-invalid' or ''}" t-att-value="id_alumno or partner.id_alumno" />
+                            </div>
+
                             <div t-attf-class="form-group #{error.get('name') and 'o_has_error' or ''} col-xl-6">
                                 <label class="col-form-label" for="name">Nombre</label>
                                 <input type="text" name="name" t-attf-class="form-control #{error.get('name') and 'is-invalid' or ''}" t-att-value="name or partner.name" />

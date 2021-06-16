@@ -16,7 +16,7 @@ from odoo.addons.portal.controllers.portal import CustomerPortal
 
 class CustomerPortalInherit(CustomerPortal):
     # MANDATORY_BILLING_FIELDS = ["name", "phone", "email", "street", "city", "country_id","new_data"]
-    MANDATORY_BILLING_FIELDS = ["name",'tipo_sangre','income_type','date_birth','account_holder','email','type_transport','curso_id','modalidad_id']
+    MANDATORY_BILLING_FIELDS = ["id_alumno", "name",'tipo_sangre','income_type','date_birth','account_holder','email','type_transport','curso_id','modalidad_id']
     
     MANDATORY_BILLING_FIELDS_PARTNER = [
         "father_name","id_padre","correo_padre","tel_padre","fecha_padre","movil_padre","lugar_trb_padre",    
@@ -449,7 +449,8 @@ class CustomerPortalInherit(CustomerPortal):
                 partner.sudo().write(values)
                 
                 request.env['crm.lead'].sudo().create({
-                    'name': partner.name + ' opportunity',
+                    'partner_id': partner.id,
+                    'name': partner.id_alumno + ' opportunity',
                     'nombre_alumno': partner.name,
                     'correo_del_estudiante':partner.email,
                     'direcc':partner.street,
@@ -629,6 +630,7 @@ class CustomerPortalInherit(CustomerPortal):
             'account_holder':account_holder,
             'cursos':cursos,
             'modalidad': modalidad,
+            'id_alumno': partner.id_alumno,
             'date_birth': partner.date_birth,
             'Origen': partner.origin,
             'type_transport':type_transport,
