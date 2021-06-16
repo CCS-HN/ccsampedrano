@@ -54,6 +54,9 @@ class resPartner(models.Model):
     lugar_trb_madre = fields.Char()
     tel_madre = fields.Char()
 
+    pais = fields.Many2one('res.country',required=True)
+    
+
     def get_age(self):
         for rec in self:
             rec.age = relativedelta(datetime.now(), rec.date_birth).years
