@@ -523,6 +523,125 @@ class CustomerPortalInherit(CustomerPortal):
     
 
 
+
+    @route(['/my/account/student'], type='http', auth='user', website=True)
+    def student(self, redirect=None, **post):
+        
+        # print('datos antes ====================',post,self)
+        
+        # if post.get('father_name'):
+        #     return self.parents(redirect=None, **post)
+        
+        values = self._prepare_portal_layout_values()
+        partner = request.env.user.partner_id
+        values.update({
+            'error': {},
+            'error_message': [],
+        })
+
+        if post and request.httprequest.method == 'POST':
+            error, error_message = self.details_form_validate(post)
+            values.update({'error': error, 'error_message': error_message})
+            values.update(post)
+            if not error:
+                values = {key: post[key] for key in self.MANDATORY_BILLING_FIELDS}
+                values.update({key: post[key] for key in self.OPTIONAL_BILLING_FIELDS if key in post})
+                for field in set(['country_id', 'state_id']) & set(values.keys()):
+                    try:
+                        values[field] = int(values[field])
+                    except:
+                        values[field] = False
+                values.update({'zip': values.pop('zipcode', '')})
+                
+                partner.receta = post['receta']
+                partner.padecimiento = post['padecimiento']
+                values.update({'income_type': post['income_type']})
+                
+                # partner.date_birth = post['date_birth']
+                partner.type_transport = post['type_transport']
+                partner.account_holder = post['account_holder']
+                partner.origin = post['origin']
+                partner.receta = post['receta']
+                partner.padecimiento = post['padecimiento']
+                partner.tipo_sangre = post['tipo_sangre']
+                
+                
+                partner.curso_id = post['curso_id']
+                partner.country_id = post['countries'] or False
+                partner.street = post['street']
+                partner.modalidad_id = post['modalidad_id']
+                partner.gender = post['gender']
+                # partner.income_type = post['income_type']
+                partner.sudo().write(values)
+                if redirect:
+                    return request.redirect(redirect)
+                return request.redirect('/my/account/parents')
+        countries = request.env['res.country'].sudo().search([])
+        states = request.env['res.country.state'].sudo().search([])
+        cursos = request.env['crm.lead.cursos'].sudo().search([])
+        modalidad = request.env['crm.lead.modalidad'].sudo().search([])
+        
+        gender = []
+        income_type = []
+        type_transport = []
+        becado2=[]
+        tipo_sangre = []
+        account_holder = []
+
+        account_holder.append('Padre')
+        account_holder.append('Madre')
+        account_holder.append('Encargado')
+
+        tipo_sangre.append('O+')
+        tipo_sangre.append('O-')
+        tipo_sangre.append('A-')
+        tipo_sangre.append('A+')
+        tipo_sangre.append('B+')
+        tipo_sangre.append('B-')
+        tipo_sangre.append('AB-')
+        tipo_sangre.append('AB+')
+
+        becado2.append('Si')
+        becado2.append('No')
+
+        income_type.append('Re-ingreso')
+        income_type.append('Primer Ingreso')
+        income_type.append('Traslado')
+
+        type_transport.append('Familiar')
+        type_transport.append('Privado')
+        type_transport.append('Publico')
+        
+        gender.append('Masculino')
+        gender.append('Femenino')
+
+
+
+        values.update({
+            'gender':gender,
+            'partner': partner,
+            'student': True,
+            'countries': countries,
+            'street':partner.street,
+            'income_type': income_type,
+            'becado2':becado2,
+            'tipo_sangre':tipo_sangre,
+            'account_holder':account_holder,
+            'cursos':cursos,
+            'modalidad': modalidad,
+            'date_birth': partner.date_birth,
+            'Origen': partner.origin,
+            'type_transport':type_transport,
+            'states': states,
+            'has_check_vat': hasattr(request.env['res.partner'], 'check_vat'),
+            'redirect': redirect,
+            'page_name': 'my_details',
+        })
+        response = request.render("custom_crm.portal_my_details_student", values)
+        response.headers['X-Frame-Options'] = 'DENY'
+        return response
+    
+
     @route(['/my/account'], type='http', auth='user', website=True)
     def account(self, redirect=None, **post):
         

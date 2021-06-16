@@ -9,7 +9,7 @@
                 <div class="o_portal_docs list-group">
                     <t t-call="portal.portal_docs_entry">
                         <t t-set="title">Pre-Matrícula</t>
-                        <t t-set="url" t-value="'/my/account/parents'"/>
+                        <t t-set="url" t-value="'/my/account/student'"/>
                     </t>
                     
                     
